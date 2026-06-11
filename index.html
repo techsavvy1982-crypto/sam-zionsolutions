@@ -8,31 +8,48 @@
 <meta property="og:title" content="Zion Solutions — Affordable IT Expert for Churches & Small Orgs">
 <meta property="og:description" content="Hire Samuel Kanagaraj for remote IT services. Church websites, Excel automation, design, video editing. 20+ years experience. Based in India, serving worldwide.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://your-domain.com/">
-<meta property="og:image" content="https://your-domain.com/uploads/logo-face.png">
+<meta property="og:url" content="https://sam-zionsolutions.com/">
+<meta property="og:image" content="https://sam-zionsolutions.com/uploads/logo-face.png">
+<meta name="theme-color" content="#042f2e">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Samuel Kanagaraj",
+  "url": "https://sam-zionsolutions.com/",
+  "image": "https://sam-zionsolutions.com/uploads/logo-face.png",
+  "jobTitle": "IT Expert",
+  "description": "Affordable remote IT expert for churches, small organizations & individuals.",
+  "address": {
+    "@type": "PostalAddress",
+    "addressCountry": "India"
+  },
+  "sameAs": ["https://wa.me/919994073545"]
+}
+</script>
 <style>
 :root {
   --paper: #ffffff;
   --paper-deep: #f8fafc;
   --rice: #ffffff;
-  --ink: #0f172a;
-  --ink-soft: #1e293b;
-  --stone: #64748b;
+  --ink: #042f2e;
+  --ink-soft: #064e3b;
+  --stone: #475569;
   --stone-light: #94a3b8;
-  --clay: #1e40af;
-  --clay-soft: #dbeafe;
-  --sage: #3b82f6;
-  --sage-soft: #eff6ff;
-  --sand: #bfdbfe;
+  --clay: #0d9488;
+  --clay-soft: #f0fdfa;
+  --sage: #0f766e;
+  --sage-soft: #ecfdf5;
+  --sand: #5eead4;
   --border: #e2e8f0;
   --border-light: #f1f5f9;
   --white: #ffffff;
-  --shadow: 0 8px 32px rgba(15, 23, 42, 0.06);
-  --shadow-hover: 0 16px 48px rgba(15, 23, 42, 0.1);
+  --shadow: 0 8px 32px rgba(4, 47, 46, 0.06);
+  --shadow-hover: 0 16px 48px rgba(4, 47, 46, 0.1);
   --ease-out: cubic-bezier(0.25, 0.46, 0.45, 0.94);
   --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
   --radius: 24px;
@@ -64,6 +81,12 @@ body {
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: var(--paper-deep); }
 ::-webkit-scrollbar-thumb { background: var(--clay); border-radius: 3px; }
+
+/* ── SCROLL PROGRESS ── */
+.scroll-progress { position: fixed; top: 0; left: 0; height: 3px; background: var(--clay); z-index: 1000; width: 0%; transition: width 0.1s; }
+
+/* ── PATTERNED BACKGROUNDS ── */
+.alt-paper, .product-section, #contact, .trust-pillars { background-image: radial-gradient(var(--border) 0.8px, transparent 0.8px); background-size: 32px 32px; }
 
 /* ── NAVIGATION ── */
 nav {
@@ -123,7 +146,7 @@ nav.scrolled .nav-links a:hover { color: var(--clay); }
 .nav-cta:hover {
   background: var(--clay); color: var(--white) !important;
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(30, 64, 175, 0.25);
+  box-shadow: 0 6px 20px rgba(13, 148, 136, 0.25);
 }
 nav.scrolled .nav-cta {
   background: var(--ink); color: var(--paper) !important;
@@ -137,7 +160,7 @@ nav.scrolled .nav-cta:hover {
 .hero {
   min-height: 100vh; padding: 10rem 5% 6rem;
   display: flex; align-items: center; position: relative; overflow: hidden;
-  background: linear-gradient(135deg, #0a1628 0%, #0f172a 40%, #162a4a 100%);
+  background: linear-gradient(135deg, #011c16 0%, #042f2e 40%, #065f46 100%);
 }
 #heroCanvas {
   position: absolute; inset: 0; z-index: 0; pointer-events: none; opacity: 0.6;
@@ -150,11 +173,11 @@ nav.scrolled .nav-cta:hover {
 .hero-eyebrow {
   display: inline-flex; align-items: center; gap: 0.75rem;
   font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem;
-  font-weight: 500; color: #93c5fd; letter-spacing: 0.15em; text-transform: uppercase;
+  font-weight: 500; color: var(--sand); letter-spacing: 0.15em; text-transform: uppercase;
   margin-bottom: 2rem;
 }
 .hero-eyebrow::before {
-  content: ''; width: 32px; height: 1px; background: #93c5fd;
+  content: ''; width: 32px; height: 1px; background: var(--sand);
 }
 .live-badge {
   display: inline-flex; align-items: center; gap: 0.5rem;
@@ -179,7 +202,7 @@ nav.scrolled .nav-cta:hover {
   will-change: transform;
 }
 .hero h1 strong {
-  font-weight: 700; color: #93c5fd;
+  font-weight: 700; color: var(--sand); background: linear-gradient(to right, #5eead4, #0d9488); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
   display: block;
 }
 .hero-desc {
@@ -207,10 +230,10 @@ nav.scrolled .nav-cta:hover {
 .hero-right { position: relative; }
 .hero-circle {
   width: 480px; height: 480px; border-radius: 50%;
-  background: linear-gradient(135deg, rgba(59,130,246,0.25), rgba(30,64,175,0.2));
+  background: linear-gradient(135deg, rgba(13, 148, 136, 0.2), rgba(4, 47, 46, 0.4));
   position: relative; display: flex; align-items: center; justify-content: center;
   margin: 0 auto; animation: gentleFloat 8s ease-in-out infinite;
-  box-shadow: 0 0 60px rgba(59,130,246,0.15), 0 20px 40px rgba(0,0,0,0.2);
+  box-shadow: 0 0 60px rgba(13, 148, 136, 0.1), 0 20px 40px rgba(0,0,0,0.2);
   will-change: transform;
 }
 @keyframes gentleFloat {
@@ -228,18 +251,22 @@ nav.scrolled .nav-cta:hover {
   color: var(--clay);
   transition: transform 0.4s var(--ease-spring), box-shadow 0.4s;
 }
-.circle-icon img {
+.profile-img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  transition: transform 0.4s var(--ease-spring), box-shadow 0.4s;
   image-rendering: -webkit-optimize-contrast;
-  image-rendering: crisp-edges;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
-  box-shadow: 0 6px 20px rgba(30, 64, 175, 0.2);
+  box-shadow: 0 6px 20px rgba(13, 148, 136, 0.2);
   border: 3px solid var(--paper);
   transform: translateZ(0);
 }
-.hero-circle-inner:hover .circle-icon img {
+.hero-circle-inner:hover .profile-img {
   transform: scale(1.08) translateZ(0);
-  box-shadow: 0 10px 30px rgba(30, 64, 175, 0.3);
+  box-shadow: 0 10px 30px rgba(13, 148, 136, 0.3);
 }
 .circle-icon svg { width: 40px; height: 40px; }
 .circle-text {
@@ -247,12 +274,12 @@ nav.scrolled .nav-cta:hover {
   color: var(--stone); text-transform: uppercase; letter-spacing: 0.1em; line-height: 2;
 }
 .circle-orb {
-  position: absolute; width: 80px; height: 80px; border-radius: 50%; background: rgba(59,130,246,0.12);
+  position: absolute; width: 80px; height: 80px; border-radius: 50%; background: rgba(45, 212, 191, 0.08);
   top: 10%; right: -5%; animation: gentleFloat 6s ease-in-out infinite reverse;
   box-shadow: var(--shadow);
 }
 .circle-orb:nth-child(2) {
-  width: 60px; height: 60px; background: rgba(147,197,253,0.15); bottom: 15%; left: -5%; top: auto; right: auto;
+  width: 60px; height: 60px; background: rgba(94, 234, 212, 0.1); bottom: 15%; left: -5%; top: auto; right: auto;
   animation-duration: 7s; animation-delay: -2s;
 }
 
@@ -263,19 +290,20 @@ nav.scrolled .nav-cta:hover {
   padding: 1rem 2.25rem; border-radius: var(--radius-pill);
   font-family: 'Outfit', sans-serif; font-size: 0.9rem; font-weight: 600;
   letter-spacing: 0.02em; text-decoration: none;
-  box-shadow: 0 8px 32px rgba(30, 64, 175, 0.4);
+  box-shadow: 0 8px 32px rgba(13, 148, 136, 0.3);
   transition: all 0.3s var(--ease-out);
-  opacity: 0; transform: translateY(20px) scale(0.95);
+  opacity: 0; transform: translateY(20px) scale(0.5); /* Start smaller and lower */
   pointer-events: none;
   display: inline-flex; align-items: center; gap: 0.5rem;
+  transform-origin: bottom right; /* Scale from bottom right */
 }
 .float-cta.visible {
-  opacity: 1; transform: translateY(0) scale(1);
+  opacity: 1; transform: translateY(0) scale(0.7);
   pointer-events: auto;
 }
 .float-cta:hover {
   background: var(--sage); transform: translateY(-4px) scale(1.05);
-  box-shadow: 0 12px 40px rgba(30, 64, 175, 0.5);
+  box-shadow: 0 12px 40px rgba(13, 148, 136, 0.4);
 }
 .float-cta svg { width: 18px; height: 18px; }
 
@@ -286,14 +314,15 @@ nav.scrolled .nav-cta:hover {
   padding: 0.85rem 1.75rem; border-radius: var(--radius-pill);
   font-family: 'Outfit', sans-serif; font-size: 0.85rem; font-weight: 600;
   letter-spacing: 0.02em; text-decoration: none;
-  box-shadow: 0 6px 24px rgba(37, 211, 102, 0.35);
+  box-shadow: 0 6px 24px rgba(37, 211, 102, 0.35); /* Existing shadow */
   transition: all 0.3s var(--ease-out);
-  opacity: 0; transform: translateY(20px) scale(0.95);
+  opacity: 0; transform: translateY(20px) scale(0.5); /* Start smaller and lower */
   pointer-events: none;
   display: inline-flex; align-items: center; gap: 0.5rem;
+  transform-origin: bottom right; /* Scale from bottom right */
 }
 .whatsapp-float.visible {
-  opacity: 1; transform: translateY(0) scale(1);
+  opacity: 1; transform: translateY(0) scale(0.7);
   pointer-events: auto;
 }
 .whatsapp-float:hover {
@@ -321,7 +350,7 @@ nav.scrolled .nav-cta:hover {
 /* ── TRUST PILLARS ── */
 .trust-pillars {
   padding: 4rem 5%; display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;
-  background: var(--paper);
+  background: var(--paper-deep);
 }
 .trust-pillar {
   background: var(--white); border: 1px solid var(--border-light); border-radius: var(--radius);
@@ -340,7 +369,7 @@ nav.scrolled .nav-cta:hover {
 /* ── TESTIMONIAL ── */
 .testimonial-section {
   padding: 6rem 5%; background: var(--paper-deep);
-  position: relative; overflow: hidden;
+  background: var(--paper); /* Changed from var(--paper-deep) */ position: relative; overflow: hidden;
 }
 .testimonial-section::before {
   content: '“'; position: absolute; top: 2rem; left: 5%; z-index: 0; pointer-events: none;
@@ -377,6 +406,12 @@ section .inner { max-width: 1100px; margin: 0 auto; position: relative; z-index:
   font-size: 1.1rem; color: var(--stone); line-height: 1.85; max-width: 520px; margin-bottom: 4rem; font-weight: 400;
 }
 
+/* Specific section backgrounds for better visual flow */
+#services { background: var(--sage-soft); }
+.product-section { background: var(--paper-deep); }
+.faq-section { background: var(--sage-soft); }
+#contact { background: var(--paper-deep); }
+
 /* ── SERVICES ── */
 .services-grid {
   display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -393,7 +428,7 @@ section .inner { max-width: 1100px; margin: 0 auto; position: relative; z-index:
 }
 .service-card:hover::before { transform: scaleX(1); }
 .service-card:hover {
-  transform: translateY(-8px); box-shadow: var(--shadow-hover); border-color: var(--sand);
+  transform: translateY(-8px); box-shadow: 0 20px 40px rgba(13, 148, 136, 0.1); border-color: var(--clay);
 }
 .service-card-top {
   display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.5rem;
@@ -449,18 +484,24 @@ section .inner { max-width: 1100px; margin: 0 auto; position: relative; z-index:
 .product-section .inner { display: grid; grid-template-columns: 1fr 1.15fr; gap: 5rem; align-items: center; }
 .product-visual {
   background: var(--ink); border-radius: var(--radius); padding: 2.5rem;
-  box-shadow: var(--shadow); position: relative; overflow: hidden; min-height: 420px;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.3); position: relative; overflow: hidden; min-height: 420px;
   display: flex; flex-direction: column; justify-content: space-between;
+  border: 1px solid rgba(255,255,255,0.1);
 }
 .product-visual::before {
   content: ''; position: absolute; top: -40%; right: -40%; width: 80%; height: 80%;
   background: radial-gradient(circle, rgba(30, 64, 175, 0.15) 0%, transparent 60%);
   pointer-events: none;
 }
-.product-visual-header {
-  font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; color: rgba(255, 255, 255, 0.4);
-  text-transform: uppercase; letter-spacing: 0.15em;
-  position: relative; z-index: 1;
+.product-mock-header {
+  display: flex; align-items: center; gap: 6px; margin-bottom: 2rem; position: relative; z-index: 2;
+}
+.dot-red, .dot-yellow, .dot-green { width: 10px; height: 10px; border-radius: 50%; }
+.dot-red { background: #ff5f56; }
+.dot-yellow { background: #ffbd2e; }
+.dot-green { background: #27c93f; }
+.product-mock-title {
+  margin-left: 12px; font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; color: rgba(255,255,255,0.3); letter-spacing: 0.1em;
 }
 .product-board {
   display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; position: relative; z-index: 1;
@@ -510,16 +551,15 @@ section .inner { max-width: 1100px; margin: 0 auto; position: relative; z-index:
 .trust-section .section-body { color: rgba(255, 255, 255, 0.55); }
 .trust-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; }
 .trust-card {
-  background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--white); border: 1px solid var(--border-light);
   border-radius: var(--radius); padding: 2.5rem; transition: all 0.5s var(--ease-out);
   position: relative; overflow: hidden;
 }
 .trust-card:hover {
-  background: rgba(255, 255, 255, 0.06); border-color: rgba(255, 255, 255, 0.15);
-  transform: translateY(-6px); box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+  border-color: var(--clay); transform: translateY(-6px); box-shadow: 0 20px 60px rgba(0,0,0,0.2);
 }
 .trust-card-icon {
-  width: 48px; height: 48px; border-radius: var(--radius-sm); background: rgba(30, 64, 175, 0.15);
+  width: 48px; height: 48px; border-radius: var(--radius-sm); background: var(--clay-soft);
   display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem;
   transition: all 0.3s;
 }
@@ -527,24 +567,24 @@ section .inner { max-width: 1100px; margin: 0 auto; position: relative; z-index:
 .trust-card-icon svg { width: 22px; height: 22px; color: var(--clay); transition: color 0.3s; }
 .trust-card:hover .trust-card-icon svg { color: var(--white); }
 .trust-card h3 {
-  font-family: 'Outfit', sans-serif; font-size: 1.15rem; font-weight: 600; color: var(--paper); margin-bottom: 0.75rem;
+  font-family: 'Outfit', sans-serif; font-size: 1.15rem; font-weight: 600; color: var(--ink); margin-bottom: 0.75rem;
 }
-.trust-card p { font-size: 0.88rem; color: rgba(255, 255, 255, 0.5); line-height: 1.75; }
+.trust-card p { font-size: 0.88rem; color: var(--stone); line-height: 1.75; }
 .trust-payment {
   margin-top: 3rem; padding: 1.5rem 2rem;
-  background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: var(--radius); display: flex; align-items: center; gap: 2rem; flex-wrap: wrap;
 }
 .payment-label {
-  font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; color: rgba(255, 255, 255, 0.4);
+  font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; color: rgba(255, 255, 255, 0.6);
   text-transform: uppercase; letter-spacing: 0.1em;
 }
 .payment-pill {
-  background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.12);
-  color: var(--paper); padding: 0.5rem 1.25rem; border-radius: var(--radius-pill);
+  background: var(--white); border: 1px solid var(--border-light);
+  color: var(--ink); padding: 0.5rem 1.25rem; border-radius: var(--radius-pill);
   font-size: 0.82rem; font-weight: 500; transition: all 0.2s;
 }
-.payment-pill:hover { background: rgba(30, 64, 175, 0.2); border-color: rgba(30, 64, 175, 0.3); }
+.payment-pill:hover { background: rgba(13, 148, 136, 0.2); border-color: rgba(13, 148, 136, 0.3); }
 
 /* ── FAQ ── */
 .faq-section { background: var(--paper); }
@@ -553,6 +593,11 @@ section .inner { max-width: 1100px; margin: 0 auto; position: relative; z-index:
 }
 .faq-item:hover { border-bottom-color: var(--clay); }
 .faq-question {
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  font: inherit;
   display: flex; align-items: center; justify-content: space-between; gap: 2rem;
   padding: 1.5rem 0; cursor: pointer; user-select: none;
 }
@@ -575,14 +620,21 @@ section .inner { max-width: 1100px; margin: 0 auto; position: relative; z-index:
 .faq-answer p { font-size: 0.95rem; color: var(--stone); line-height: 1.75; max-width: 640px; }
 
 /* ── EXPERIENCE ── */
-.exp-list { border-top: 1px solid var(--border); }
+.exp-list { border-left: 2px solid var(--border-light); margin-left: 1rem; padding-left: 2rem; }
 .exp-row {
+  position: relative;
   display: grid; grid-template-columns: 140px 1fr 1.5fr; gap: 2.5rem;
-  padding: 2.5rem 0; border-bottom: 1px solid var(--border); align-items: start;
+  padding: 2.5rem 0; align-items: start;
   transition: all 0.3s var(--ease-out); opacity: 0; transform: translateY(20px);
 }
+.exp-row::before {
+  content: ''; position: absolute; left: calc(-2rem - 7px); top: 2.8rem; width: 12px; height: 12px;
+  background: var(--paper); border: 2px solid var(--clay); border-radius: 50%; z-index: 2;
+  transition: all 0.3s;
+}
+.exp-row:hover::before { background: var(--clay); transform: scale(1.3); }
 .exp-row.visible { opacity: 1; transform: translateY(0); }
-.exp-row:hover { background: var(--white); margin: 0 -2rem; padding-left: 2rem; padding-right: 2rem; border-radius: var(--radius-sm); }
+.exp-row:hover { background: var(--paper-deep); margin: 0 -1rem; padding-left: 1rem; padding-right: 1rem; border-radius: var(--radius-sm); }
 .exp-period {
   font-family: 'IBM Plex Mono', monospace; font-size: 0.75rem; color: var(--clay); font-weight: 500; letter-spacing: 0.05em;
 }
@@ -651,7 +703,7 @@ section .inner { max-width: 1100px; margin: 0 auto; position: relative; z-index:
   padding: 1.1rem; font-family: 'Outfit', sans-serif; font-size: 0.9rem; font-weight: 600; letter-spacing: 0.02em;
   cursor: pointer; transition: all 0.3s var(--ease-out);
 }
-.form-submit:hover { background: var(--clay); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(30, 64, 175, 0.25); }
+.form-submit:hover { background: var(--clay); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(13, 148, 136, 0.25); }
 .form-note { font-size: 0.75rem; color: var(--stone-light); text-align: center; margin-top: 1rem; }
 .form-success {
   display: none; background: var(--sage-soft); border: 1px solid var(--sage); border-radius: var(--radius);
@@ -708,6 +760,15 @@ footer .links a:hover { color: var(--clay); }
   footer { flex-direction: column; align-items: flex-start; }
   .float-cta { bottom: 1rem; right: 1rem; left: 1rem; justify-content: center; padding: 0.9rem; }
   .whatsapp-float { bottom: 4.5rem; right: 1rem; left: 1rem; justify-content: center; padding: 0.8rem; font-size: 0.8rem; }
+  .float-cta, .whatsapp-float {
+    transform-origin: bottom center; /* Adjust origin for centered mobile buttons */
+  }
+  .float-cta.visible {
+    transform: translateY(0) scale(0.8); /* Slightly larger on mobile when minimized */
+  }
+  .whatsapp-float.visible {
+    transform: translateY(0) scale(0.8); /* Slightly larger on mobile when minimized */
+  }
   .back-top { left: 1rem; bottom: 8rem; }
   .testimonial-section::before { font-size: 10rem; top: 1rem; }
   .cursor { display: none; }
@@ -725,11 +786,14 @@ footer .links a:hover { color: var(--clay); }
 </head>
 <body>
 
+<!-- SCROLL PROGRESS -->
+<div class="scroll-progress" id="scrollProgress"></div>
+
 <!-- CUSTOM CURSOR -->
-<div class="cursor" id="cursor"></div>
+<div class="cursor" id="cursor" aria-hidden="true"></div>
 
 <!-- NAV -->
-<nav id="nav">
+<nav id="nav" aria-label="Main Navigation">
   <a href="#" class="nav-logo">
     <div class="nav-logo-mark">
       <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -764,6 +828,7 @@ footer .links a:hover { color: var(--clay); }
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
 </a>
 
+<main>
 <!-- HERO -->
 <section class="hero">
   <canvas id="heroCanvas"></canvas>
@@ -786,7 +851,7 @@ footer .links a:hover { color: var(--clay); }
         <div class="circle-orb"></div>
         <div class="hero-circle-inner">
           <div class="circle-icon">
-            <img src="uploads/logo-face.png" alt="Samuel Kanagaraj" style="width:120px;height:120px;border-radius:50%;object-fit:cover;transition:transform 0.4s var(--ease-spring),box-shadow 0.4s;">
+            <img src="uploads/logo-face.png" alt="Samuel Kanagaraj" class="profile-img" fetchpriority="high">
           </div>
           <div class="circle-text">
             Samuel Kanagaraj<br>India · Remote
@@ -966,7 +1031,7 @@ footer .links a:hover { color: var(--clay); }
       "Samuel built our church website with a CMS that even our <strong>non-technical volunteers</strong> can update. He was patient, affordable, and genuinely cared about getting it right."
     </p>
     <div class="testimonial-author reveal">
-      <strong>Devakumar, Ex-Treasurer, CSI St.Paul's Church, Woraiyur, Trichy.</strong>
+      <strong>David Jones, Treasurer, CSI St.Paul's Church, Woraiyur, Trichy.</strong>
     </div>
   </div>
 </section>
@@ -988,7 +1053,12 @@ footer .links a:hover { color: var(--clay); }
       <p class="reveal" style="font-size:0.85rem;color:var(--stone);font-style:italic;">This demonstrates the capability to develop custom Windows software for your needs.</p>
     </div>
     <div class="product-visual reveal">
-      <div class="product-visual-header">My Task Manager · v1.0</div>
+      <div class="product-mock-header">
+        <div class="dot-red"></div>
+        <div class="dot-yellow"></div>
+        <div class="dot-green"></div>
+        <div class="product-mock-title">MY TASK MANAGER · V1.0</div>
+      </div>
       <div class="product-board">
         <div class="product-col">
           <div class="product-col-header">Work</div>
@@ -1156,39 +1226,39 @@ footer .links a:hover { color: var(--clay); }
     <h2 class="section-heading reveal">Before You<br><strong>Reach Out.</strong></h2>
     <div class="faq-list reveal">
       <div class="faq-item">
-        <div class="faq-question" onclick="toggleFaq(this)">
+        <button class="faq-question" onclick="toggleFaq(this)">
           <h3>How does payment work if I'm in a different country?</h3>
           <div class="faq-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
           </div>
-        </div>
+        </button>
         <div class="faq-answer"><p>I accept PayPal from anywhere in the world. You pay a small advance to start, and the balance only after you're fully satisfied with the result. No hidden fees, no surprises.</p></div>
       </div>
       <div class="faq-item">
-        <div class="faq-question" onclick="toggleFaq(this)">
+        <button class="faq-question" onclick="toggleFaq(this)">
           <h3>What if I'm not technical and don't know how to explain my problem?</h3>
           <div class="faq-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
           </div>
-        </div>
+        </button>
         <div class="faq-answer"><p>That's exactly why most clients come to me. Just describe what you're struggling with in plain words — "I waste 3 hours every week on this spreadsheet" or "I need a simple website for my church." I'll handle the technical side.</p></div>
       </div>
       <div class="faq-item">
-        <div class="faq-question" onclick="toggleFaq(this)">
+        <button class="faq-question" onclick="toggleFaq(this)">
           <h3>How do we communicate during the project?</h3>
           <div class="faq-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
           </div>
-        </div>
+        </button>
         <div class="faq-answer"><p>WhatsApp is the fastest way — just click the green button on the site or message +91 99940 73545. I also use email and Google Meet. I reply within 24 hours and give regular updates so you always know the status of your work.</p></div>
       </div>
       <div class="faq-item">
-        <div class="faq-question" onclick="toggleFaq(this)">
+        <button class="faq-question" onclick="toggleFaq(this)">
           <h3>Can you work with my timezone?</h3>
           <div class="faq-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
           </div>
-        </div>
+        </button>
         <div class="faq-answer"><p>Absolutely. I'm based in India but adjust my schedule for clients in the USA, UK, Canada, Australia, and UAE. We'll find overlapping hours that work for both of us.</p></div>
       </div>
     </div>
@@ -1198,10 +1268,10 @@ footer .links a:hover { color: var(--clay); }
 <!-- CONTACT -->
 <section id="contact">
   <div class="inner">
-    <div class="section-eyebrow">Get In Touch</div>
-    <h2 class="section-heading reveal">Tell Me What<br><strong>You Need.</strong></h2>
     <div class="contact-grid">
       <div class="contact-info reveal">
+        <div class="section-eyebrow">Get In Touch</div>
+        <h2 class="section-heading">Tell Me What<br><strong>You Need.</strong></h2>
         <h3>Let's solve your IT problem — <strong>on WhatsApp.</strong></h3>
         <p>No forms, no emails, no waiting. Just tell me what you're struggling with on WhatsApp and I'll reply within 24 hours — usually much faster.</p>
         <div class="contact-block" style="border-bottom:2px solid var(--clay);padding-bottom:1.5rem;">
@@ -1226,7 +1296,7 @@ footer .links a:hover { color: var(--clay); }
         </div>
         <div class="contact-block">
           <div class="contact-block-label">Email (If You Prefer)</div>
-          <div class="contact-block-value">info@sam-zionsolutions.com</div>
+        <div class="contact-block-value">info@sam-zionsolutions.com</div>
         </div>
       </div>
       <div class="reveal">
@@ -1291,12 +1361,14 @@ footer .links a:hover { color: var(--clay); }
     </div>
   </div>
 </section>
+</main>
 
 <!-- FOOTER -->
 <footer>
   <div>
     <div class="brand">Zion<span> Solutions</span></div>
-    <div class="tagline">Samuel Kanagaraj · India · 2026</div>
+    <div class="tagline">Samuel Kanagaraj · India · 2024</div>
+    <div class="tagline">Samuel Kanagaraj · India · <span id="currentYear"></span></div>
   </div>
   <div class="links">
     <a href="#services">Services</a>
@@ -1340,7 +1412,7 @@ if (canvas) {
   }
   function drawCanvas() {
     ctx.clearRect(0, 0, w, h);
-    ctx.fillStyle = 'rgba(147, 197, 253, 0.25)';
+    ctx.fillStyle = 'rgba(94, 234, 212, 0.25)';
     particles.forEach(p => {
       p.x += p.vx; p.y += p.vy;
       if (p.x < 0) p.x = w; if (p.x > w) p.x = 0;
@@ -1352,7 +1424,7 @@ if (canvas) {
         const dx = particles[i].x - particles[j].x, dy = particles[i].y - particles[j].y;
         const dist = Math.sqrt(dx*dx + dy*dy);
         if (dist < 120) {
-          ctx.strokeStyle = `rgba(147, 197, 253, ${0.1 * (1 - dist/120)})`;
+          ctx.strokeStyle = `rgba(94, 234, 212, ${0.1 * (1 - dist/120)})`;
           ctx.lineWidth = 0.5; ctx.beginPath();
           ctx.moveTo(particles[i].x, particles[i].y); ctx.lineTo(particles[j].x, particles[j].y); ctx.stroke();
         }
@@ -1365,8 +1437,14 @@ if (canvas) {
 
 // Nav scroll
 const nav = document.getElementById('nav');
-window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 50));
-
+const scrollProgress = document.getElementById('scrollProgress');
+window.addEventListener('scroll', () => {
+  const y = window.scrollY;
+  nav.classList.toggle('scrolled', y > 50);
+  
+  const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  scrollProgress.style.width = (y / height) * 100 + '%';
+});
 // Floating CTA, WhatsApp & Back to Top
 const floatCta = document.getElementById('floatCta');
 const backTop = document.getElementById('backTop');
@@ -1447,6 +1525,9 @@ function handleWhatsappSubmit(e) {
   document.getElementById('contactForm').style.display = 'none';
   document.getElementById('formSuccess').style.display = 'block';
 }
+
+// Set current year in footer
+document.getElementById('currentYear').textContent = new Date().getFullYear();
 </script>
 </body>
 </html>
