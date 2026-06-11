@@ -1368,7 +1368,6 @@ footer .links a:hover { color: var(--clay); }
   <div>
     <div class="brand">Zion<span> Solutions</span></div>
     <div class="tagline">Samuel Kanagaraj · India · 2024</div>
-    <div class="tagline">Samuel Kanagaraj · India · <span id="currentYear"></span></div>
   </div>
   <div class="links">
     <a href="#services">Services</a>
@@ -1525,9 +1524,6 @@ function handleWhatsappSubmit(e) {
   document.getElementById('contactForm').style.display = 'none';
   document.getElementById('formSuccess').style.display = 'block';
 }
-
-// Set current year in footer
-document.getElementById('currentYear').textContent = new Date().getFullYear();
 </script>
 </body>
 </html>
