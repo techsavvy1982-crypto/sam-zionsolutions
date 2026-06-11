@@ -1,8 +1,0 @@
-SSH PUBLIC KEY
-==============
-
-Copy the entire text below and add it to GitHub at https://github.com/settings/keys
-
----
-
-ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQChL2DpCA4NfeOXKhP0wQkzQbJ/F4g9cF4Al4AiHbMIto2iK+Ec9wX47sSHkqF14FLm3CfvmNkDh/WHdajQWanRr+yVyFWsckEuc6InEB1b2QNZYAAud2qcSfM7iCqj0ccG+hQPg/8kku3bdmBWhxxXR1u04LAWoepfNrYbVRN56BuuzrcqJq1PHPLiCF4R54E1iLwJdsTCDQuqKGeh880/lKanh+TtYzM30LhWE50BYjm4AaMQTU3E2/napwWqOqADpVsx1wgx2KcTCikseef+QAMSOyQSUXaId+OtW4kTqRE5krm/5Rsc0v1htqNu24QmI47NpSDju2ZQ4pesJ5Nkf61nFHRdV5/p5aisAbd7nKo0C22HNAOuVxx36IkJM54/RJ+5uief5od6oAnzGo+QknvdwnXiYuJOsH9DBbidKrWOfezRTI+//H9gEqPs11G3JDFqWeZygrfAxDbKHCpcfBGfi1Af7ipGDbohSstti7ETedAlOldCIo/cDayT3ZPMf/nyNtcXbevYZVqNhrJWHmAXGXVCyfvZqbM+v0ES6Bb42Whk2fYzF3zoz30hlcKC+vt5Mr2vwCctNhppKo77r4E2ZL/PJilmfO1bvWdqk/GN1kjNojNMjkFR/3FluEXGHLqrJPErO+JCheSj+QHLQZszJdMgcSqblKMyqfVVbQ== techsavvy1982-crypto
