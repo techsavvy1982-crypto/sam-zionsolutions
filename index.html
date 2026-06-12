@@ -366,25 +366,62 @@ nav.scrolled .nav-cta:hover {
   font-size: 0.78rem; color: var(--stone);
 }
 
-/* ── TESTIMONIAL ── */
-.testimonial-section {
-  padding: 6rem 5%; background: var(--paper-deep);
-  background: var(--paper); /* Changed from var(--paper-deep) */ position: relative; overflow: hidden;
-}
-.testimonial-section::before {
-  content: '“'; position: absolute; top: 2rem; left: 5%; z-index: 0; pointer-events: none;
-  font-family: Georgia, 'Times New Roman', serif; font-size: 20rem; line-height: 1; color: var(--border-light); opacity: 0.5;
-}
-.testimonial-inner { max-width: 800px; margin: 0 auto; position: relative; z-index: 1; text-align: center; }
-.testimonial-quote {
-  font-family: 'Outfit', sans-serif; font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 300;
-  line-height: 1.5; color: var(--ink); letter-spacing: -0.01em; margin-bottom: 2rem;
-}
+/* ── TESTIMONIALS ── */
+.testimonial-section { padding: 8rem 5%; background: var(--white); position: relative; overflow: hidden; }
+.testimonial-section::before { content: '“'; position: absolute; top: 2rem; left: 5%; font-family: Georgia, serif; font-size: 20rem; color: var(--border-light); opacity: 0.5; }
+.testimonial-container { max-width: 850px; margin: 0 auto; position: relative; z-index: 1; }
+.testimonial-slider { position: relative; min-height: 240px; }
+.testimonial-slide { position: absolute; top: 0; left: 0; width: 100%; opacity: 0; visibility: hidden; transition: all 0.6s var(--ease-out); text-align: center; }
+.testimonial-slide.active { opacity: 1; visibility: visible; position: relative; }
+.testimonial-quote { font-family: 'Outfit', sans-serif; font-size: clamp(1.4rem, 3vw, 1.85rem); font-weight: 300; line-height: 1.55; color: var(--ink); margin-bottom: 2.5rem; }
 .testimonial-quote strong { font-weight: 600; color: var(--clay); }
-.testimonial-author {
-  font-family: 'IBM Plex Mono', monospace; font-size: 0.85rem; color: var(--stone); letter-spacing: 0.05em;
+.testimonial-author { font-family: 'IBM Plex Mono', monospace; font-size: 0.85rem; color: var(--stone); letter-spacing: 0.05em; }
+.testimonial-author strong { color: var(--ink); font-weight: 600; display: block; margin-bottom: 0.25rem; }
+.testimonial-nav { display: flex; justify-content: center; gap: 1rem; margin-top: 3rem; }
+.test-nav-btn { width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--border); background: var(--white); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s; color: var(--stone); outline: none; }
+.test-nav-btn:hover { background: var(--clay); color: var(--white); border-color: var(--clay); transform: translateY(-2px); }
+
+/* ── PRODUCT SHOWCASE ── */
+.product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; margin-top: 4rem; }
+.product-card { background: var(--white); border-radius: var(--radius); border: 1px solid var(--border-light); overflow: hidden; box-shadow: var(--shadow); transition: all 0.4s var(--ease-out); }
+.product-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-hover); border-color: var(--clay); }
+.product-img { width: 100%; height: 200px; background: var(--ink); overflow: hidden; position: relative; border-bottom: 1px solid var(--border-light); }
+.product-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s; opacity: 0.85; }
+.product-card:hover .product-img img { transform: scale(1.05); opacity: 1; }
+.product-content { padding: 2rem; }
+.product-tag { display: inline-block; font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; font-weight: 600; text-transform: uppercase; color: var(--clay); background: var(--clay-soft); padding: 0.3rem 0.8rem; border-radius: var(--radius-pill); margin-bottom: 1rem; }
+.product-card h3 { font-family: 'Outfit', sans-serif; font-size: 1.2rem; font-weight: 600; color: var(--ink); margin-bottom: 0.75rem; }
+.product-card p { font-size: 0.88rem; color: var(--stone); line-height: 1.7; margin-bottom: 0; }
+/* ── PRODUCT SLIDER ── */
+.product-slider-container { max-width: 1000px; margin: 4rem auto 0; position: relative; }
+.product-slider { position: relative; min-height: 480px; background: var(--white); border-radius: var(--radius); border: 1px solid var(--border-light); box-shadow: var(--shadow); overflow: hidden; }
+.product-slide { position: absolute; inset: 0; opacity: 0; visibility: hidden; transition: all 0.6s ease; display: flex; align-items: center; }
+.product-slide.active { opacity: 1; visibility: visible; }
+.product-slide-inner { display: grid; grid-template-columns: 1.2fr 1fr; width: 100%; height: 100%; }
+.product-slide-img { background: #000; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+.product-slide-img img { width: 100%; height: 100%; object-fit: contain; }
+.product-slide-content { padding: 4rem; display: flex; flex-direction: column; justify-content: center; }
+.product-slide-tag { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; color: var(--clay); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem; display: block; }
+.product-slide h3 { font-family: 'Outfit', sans-serif; font-size: 2rem; font-weight: 700; color: var(--ink); margin-bottom: 1.5rem; line-height: 1.2; }
+.product-slide p { font-size: 1rem; color: var(--stone); line-height: 1.8; margin-bottom: 2rem; }
+.product-slider-nav {
+  position: absolute; top: 50%; left: -22px; right: -22px;
+  transform: translateY(-50%);
+  display: flex; justify-content: space-between;
+  z-index: 10; pointer-events: none;
 }
-.testimonial-author strong { color: var(--ink); font-weight: 600; }
+.product-slider-nav .test-nav-btn {
+  pointer-events: auto;
+  background: var(--white);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+@media (max-width: 850px) {
+  .product-slide-inner { grid-template-columns: 1fr; }
+  .product-slide-img { height: 250px; }
+  .product-slide-content { padding: 2.5rem; }
+  .product-slider { min-height: 600px; }
+  .product-slider-nav { left: 0.5rem; right: 0.5rem; bottom: auto; transform: translateY(-50%); }
+}
 
 /* ── SECTIONS ── */
 section { padding: 8rem 5%; position: relative; }
@@ -1024,61 +1061,65 @@ footer .links a:hover { color: var(--clay); }
   </div>
 </section>
 
-<!-- TESTIMONIAL -->
-<section class="testimonial-section">
-  <div class="testimonial-inner">
-    <p class="testimonial-quote reveal">
-      "Samuel built our church website with a CMS that even our <strong>non-technical volunteers</strong> can update. He was patient, affordable, and genuinely cared about getting it right."
-    </p>
-    <div class="testimonial-author reveal">
-      <strong>David Jones, Treasurer, CSI St.Paul's Church, Woraiyur, Trichy.</strong>
+<!-- TESTIMONIALS -->
+<section class="testimonial-section reveal">
+  <div class="testimonial-container">
+    <div class="testimonial-slider" id="testimonialSlider">
+      <div class="testimonial-slide active">
+        <p class="testimonial-quote">"The Church Management System Samuel built has <strong>streamlined our membership tracking and payment reporting</strong>. It's exactly what we needed without the high cost of subscription software."</p>
+        <div class="testimonial-author"><strong>David Jones</strong>Treasurer, St.Paul’s Church, Woraiyur, Trichy</div>
+      </div>
+      <div class="testimonial-slide">
+        <p class="testimonial-quote">"Our new church website is fantastic! Congregation members can now <strong>access sermons and events</strong> easily on their phones. The content management is incredibly simple."</p>
+        <div class="testimonial-author"><strong>Devakumar</strong>PCC Member, St.Paul’s Church, Woraiyur, Trichy</div>
+      </div>
+    </div>
+    <div class="testimonial-nav">
+      <button class="test-nav-btn" onclick="prevTestimonial()" aria-label="Previous testimonial">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <button class="test-nav-btn" onclick="nextTestimonial()" aria-label="Next testimonial">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
     </div>
   </div>
 </section>
 
-<!-- PRODUCT -->
-<section class="product-section" id="product">
+<!-- PRODUCTS & SOLUTIONS -->
+<section class="alt-paper" id="product">
   <div class="inner">
-    <div>
-      <div class="product-badge reveal">In-House Product</div>
-      <h2 class="section-heading reveal">My Task<br><strong>Manager.</strong></h2>
-      <p class="section-body reveal">A fully-featured desktop task management app built entirely by Samuel — proof that Zion Solutions doesn't just support technology, we build it.</p>
-      <ul class="product-list reveal">
-        <li><div class="dot"></div>Drag-and-drop sticky notes on an infinite canvas</li>
-        <li><div class="dot"></div>10 beautiful themes with unique background patterns</li>
-        <li><div class="dot"></div>PDF export — full report or canvas screenshot</li>
-        <li><div class="dot"></div>Google Drive sync — access your notes anywhere</li>
-        <li><div class="dot"></div>Organise tasks by category: Church, Office, Home & more</li>
-      </ul>
-      <p class="reveal" style="font-size:0.85rem;color:var(--stone);font-style:italic;">This demonstrates the capability to develop custom Windows software for your needs.</p>
-    </div>
-    <div class="product-visual reveal">
-      <div class="product-mock-header">
-        <div class="dot-red"></div>
-        <div class="dot-yellow"></div>
-        <div class="dot-green"></div>
-        <div class="product-mock-title">MY TASK MANAGER · V1.0</div>
-      </div>
-      <div class="product-board">
-        <div class="product-col">
-          <div class="product-col-header">Work</div>
-          <div class="product-task">Client Report</div>
-          <div class="product-task">Update Website</div>
-          <div class="product-task">Send Invoice</div>
+    <div class="section-eyebrow">Some of our Products</div>
+    <h2 class="section-heading reveal">Built by<br><strong>Zion Solutions.</strong></h2>
+    <p class="section-body reveal">I don't just use technology; I create it. Here is the proof of the solutions I've developed.</p>
+
+    <div class="product-slider-container reveal">
+      <div class="product-slider" id="productSlider">
+        <!-- 1. Excel Automation -->
+        <div class="product-slide active">
+          <div class="product-slide-img"><img src="uploads/excel%20automation.png" alt="Excel Automation"></div>
         </div>
-        <div class="product-col">
-          <div class="product-col-header">Projects</div>
-          <div class="product-task">Excel Dashboard</div>
-          <div class="product-task">New Brochure</div>
+        <!-- 2. Church Website with CMS -->
+        <div class="product-slide">
+          <div class="product-slide-img"><img src="uploads/Church%20Website%20with%20CMS.png" alt="Church Website with CMS"></div>
         </div>
-        <div class="product-col">
-          <div class="product-col-header">Personal</div>
-          <div class="product-task">Pay Bill</div>
-          <div class="product-task">Doctor Appt</div>
-          <div class="product-task">Groceries</div>
+        <!-- 3. My Task Manager -->
+        <div class="product-slide">
+          <div class="product-slide-img"><img src="uploads/My%20Task%20Manager.png" alt="My Task Manager"></div>
+        </div>
+        <!-- 4. Church CMS -->
+        <div class="product-slide">
+          <div class="product-slide-img"><img src="uploads/Church%20CMS.png" alt="Church CMS"></div>
         </div>
       </div>
-      <div class="product-visual-footer">Powered by Zion Solutions · Samuel Kanagaraj</div>
+      
+      <div class="product-slider-nav">
+        <button class="test-nav-btn" onclick="prevProduct()" aria-label="Previous product">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <button class="test-nav-btn" onclick="nextProduct()" aria-label="Next product">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
     </div>
   </div>
 </section>
@@ -1461,27 +1502,71 @@ window.addEventListener('scroll', () => {
   if (heroTitle) heroTitle.style.transform = `translateY(${y * 0.15}px)`;
 });
 
-// Scroll reveal + stagger + count-up
-const revealEls = document.querySelectorAll('.reveal, .exp-row, .skill-item');
-const obs = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      e.target.classList.add('visible');
-      // Animate skill bars
-      e.target.querySelectorAll('.skill-fill').forEach(b => b.style.width = b.dataset.w + '%');
-      // Count up numbers
-      e.target.querySelectorAll('.skill-pct').forEach(el => {
-        const target = parseInt(el.dataset.target);
-        let current = 0; const step = Math.max(1, Math.floor(target / 30));
-        const timer = setInterval(() => {
-          current += step; if (current >= target) { current = target; clearInterval(timer); }
-          el.textContent = current + '%';
-        }, 30);
-      });
+// Intersection Observer for reveals and skills
+const observerOptions = { threshold: 0.15, rootMargin: '0px 0px -50px 0px' };
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      
+      // If it's a skill item, animate it
+      if (entry.target.classList.contains('skill-item')) {
+        const fill = entry.target.querySelector('.skill-fill');
+        const pct = entry.target.querySelector('.skill-pct');
+        if (fill && pct && !entry.target.dataset.animated) {
+          entry.target.dataset.animated = "true";
+          fill.style.width = fill.dataset.w + '%';
+          animateValue(pct, 0, parseInt(pct.dataset.target), 1500);
+        }
+      }
+      
+      // If it's a reveal container with stagger children
+      if (entry.target.classList.contains('reveal')) {
+        entry.target.querySelectorAll('.stagger').forEach(child => child.classList.add('visible'));
+      }
+      
+      revealObserver.unobserve(entry.target);
     }
   });
-}, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
-revealEls.forEach(el => obs.observe(el));
+}, observerOptions);
+
+document.querySelectorAll('.reveal, .exp-row, .skill-item').forEach(el => revealObserver.observe(el));
+
+function animateValue(obj, start, end, duration) {
+  let startTimestamp = null;
+  const step = (timestamp) => {
+    if (!startTimestamp) startTimestamp = timestamp;
+    const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+    obj.innerHTML = Math.floor(progress * (end - start) + start) + "%";
+    if (progress < 1) { window.requestAnimationFrame(step); }
+  };
+  window.requestAnimationFrame(step);
+}
+
+// Testimonial Slider
+let currentTestimonial = 0;
+const testimonialSlides = document.querySelectorAll('.testimonial-slide');
+function showTestimonial(index) {
+  testimonialSlides.forEach(s => s.classList.remove('active'));
+  currentTestimonial = (index + testimonialSlides.length) % testimonialSlides.length;
+  testimonialSlides[currentTestimonial].classList.add('active');
+}
+function nextTestimonial() { showTestimonial(currentTestimonial + 1); }
+function prevTestimonial() { showTestimonial(currentTestimonial - 1); }
+// Auto slide
+setInterval(nextTestimonial, 8000);
+
+// Product Slider
+let currentProduct = 0;
+const productSlides = document.querySelectorAll('.product-slide');
+function showProduct(index) {
+  productSlides.forEach(s => s.classList.remove('active'));
+  currentProduct = (index + productSlides.length) % productSlides.length;
+  productSlides[currentProduct].classList.add('active');
+}
+function nextProduct() { showProduct(currentProduct + 1); }
+function prevProduct() { showProduct(currentProduct - 1); }
+setInterval(nextProduct, 10000);
 
 // Staggered children in revealed containers
 document.querySelectorAll('.reveal').forEach(parent => {
