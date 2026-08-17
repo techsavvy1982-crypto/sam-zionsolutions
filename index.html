@@ -67,7 +67,7 @@
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: auto; }
 body {
   font-family: 'Inter', sans-serif;
   color: var(--ink);
@@ -81,7 +81,7 @@ body {
 .cursor {
   position: fixed; top: 0; left: 0; width: 10px; height: 10px;
   background: var(--clay); border-radius: 50%; pointer-events: none;
-  z-index: 9999; mix-blend-mode: difference; transform: translate(-50%,-50%);
+  z-index: 9999; transform: translate(-50%,-50%);
   transition: width 0.2s, height 0.2s, background 0.2s;
 }
 .cursor.hover { width: 36px; height: 36px; background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.5); }
@@ -92,7 +92,7 @@ body {
 ::-webkit-scrollbar-thumb { background: var(--clay); border-radius: 3px; }
 
 /* ── SCROLL PROGRESS ── */
-.scroll-progress { position: fixed; top: 0; left: 0; height: 3px; background: var(--clay); z-index: 1000; width: 0%; transition: width 0.1s; }
+.scroll-progress { position: fixed; top: 0; left: 0; height: 3px; width: 100%; background: var(--clay); z-index: 1000; transform: scaleX(0); transform-origin: left; }
 
 /* ── PATTERNED BACKGROUNDS ── */
 .alt-paper, .product-section, #contact, .trust-pillars { background-image: radial-gradient(var(--border) 0.8px, transparent 0.8px); background-size: 32px 32px; }
@@ -106,8 +106,7 @@ nav {
   color: var(--white);
 }
 nav.scrolled {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(12px);
+  background: #ffffff;
   height: 72px;
   box-shadow: 0 1px 0 var(--border-light);
   color: var(--ink);
@@ -208,7 +207,7 @@ nav.scrolled .nav-cta:hover {
   font-family: 'Outfit', sans-serif; font-size: clamp(3rem, 6vw, 5.5rem);
   font-weight: 300; line-height: 1.05; letter-spacing: -0.04em;
   color: var(--white); margin-bottom: 1.5rem;
-  will-change: transform;
+  will-change: auto;
 }
 .hero h1 strong {
   font-weight: 700; color: var(--sand); background: linear-gradient(to right, #5eead4, #0d9488); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
@@ -243,7 +242,7 @@ nav.scrolled .nav-cta:hover {
   position: relative; display: flex; align-items: center; justify-content: center;
   margin: 0 auto; animation: gentleFloat 8s ease-in-out infinite;
   box-shadow: 0 0 60px rgba(13, 148, 136, 0.1), 0 20px 40px rgba(0,0,0,0.2);
-  will-change: transform;
+  will-change: auto;
 }
 @keyframes gentleFloat {
   0%, 100% { transform: translateY(0); }
@@ -1436,88 +1435,85 @@ footer .links a:hover { color: var(--clay); }
 </footer>
 
 <script>
-// Custom Cursor
 const cursor = document.getElementById('cursor');
 if (cursor && window.matchMedia('(pointer: fine)').matches) {
-  let mx = 0, my = 0, cx = 0, cy = 0;
-  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
-  function loop() {
-    cx += (mx - cx) * 0.15; cy += (my - cy) * 0.15;
-    cursor.style.left = cx + 'px'; cursor.style.top = cy + 'px';
-    requestAnimationFrame(loop);
-  }
-  loop();
+  document.addEventListener('mousemove', e => {
+    cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`;
+  }, { passive: true });
   document.querySelectorAll('a, button, .faq-question').forEach(el => {
     el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
     el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
   });
 }
 
-// Hero Canvas Particles
 const canvas = document.getElementById('heroCanvas');
 if (canvas) {
-  const ctx = canvas.getContext('2d');
-  let w, h, particles = [];
+  const ctx = canvas.getContext('2d', { alpha: true });
+  let w, h, particles = [], running = true;
   function resize() { w = canvas.width = canvas.offsetWidth; h = canvas.height = canvas.offsetHeight; }
-  resize(); window.addEventListener('resize', resize);
-  for (let i = 0; i < 60; i++) {
+  resize();
+  window.addEventListener('resize', resize, { passive: true });
+  const count = 22;
+  for (let i = 0; i < count; i++) {
     particles.push({
       x: Math.random() * w, y: Math.random() * h,
-      vx: (Math.random() - 0.5) * 0.3, vy: (Math.random() - 0.5) * 0.3,
-      r: Math.random() * 1.5 + 0.5
+      vx: (Math.random() - 0.5) * 0.25, vy: (Math.random() - 0.5) * 0.25,
+      r: Math.random() * 1.4 + 0.4
     });
   }
   function drawCanvas() {
+    if (!running) return;
     ctx.clearRect(0, 0, w, h);
-    ctx.fillStyle = 'rgba(94, 234, 212, 0.25)';
-    particles.forEach(p => {
+    ctx.fillStyle = 'rgba(94, 234, 212, 0.28)';
+    for (const p of particles) {
       p.x += p.vx; p.y += p.vy;
       if (p.x < 0) p.x = w; if (p.x > w) p.x = 0;
       if (p.y < 0) p.y = h; if (p.y > h) p.y = 0;
       ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.fill();
-    });
-    for (let i = 0; i < particles.length; i++) {
-      for (let j = i + 1; j < particles.length; j++) {
-        const dx = particles[i].x - particles[j].x, dy = particles[i].y - particles[j].y;
-        const dist = Math.sqrt(dx*dx + dy*dy);
-        if (dist < 120) {
-          ctx.strokeStyle = `rgba(94, 234, 212, ${0.1 * (1 - dist/120)})`;
-          ctx.lineWidth = 0.5; ctx.beginPath();
-          ctx.moveTo(particles[i].x, particles[i].y); ctx.lineTo(particles[j].x, particles[j].y); ctx.stroke();
-        }
-      }
     }
     requestAnimationFrame(drawCanvas);
   }
-  drawCanvas();
+  const hero = document.querySelector('.hero');
+  if ('IntersectionObserver' in window && hero) {
+    new IntersectionObserver(entries => {
+      running = entries[0].isIntersecting && !document.hidden;
+      if (running) requestAnimationFrame(drawCanvas);
+    }, { threshold: 0.05 }).observe(hero);
+  } else {
+    drawCanvas();
+  }
+  document.addEventListener('visibilitychange', () => {
+    running = !document.hidden && running;
+    if (!document.hidden) {
+      running = true;
+      requestAnimationFrame(drawCanvas);
+    }
+  });
 }
 
-// Nav scroll
 const nav = document.getElementById('nav');
 const scrollProgress = document.getElementById('scrollProgress');
-window.addEventListener('scroll', () => {
-  const y = window.scrollY;
-  nav.classList.toggle('scrolled', y > 50);
-  
-  const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-  scrollProgress.style.width = (y / height) * 100 + '%';
-});
-// Floating CTA, WhatsApp & Back to Top
 const floatCta = document.getElementById('floatCta');
 const backTop = document.getElementById('backTop');
 const whatsappFloat = document.getElementById('whatsappFloat');
-window.addEventListener('scroll', () => {
-  floatCta.classList.toggle('visible', window.scrollY > 120);
-  whatsappFloat.classList.toggle('visible', window.scrollY > 120);
-  backTop.classList.toggle('visible', window.scrollY > window.innerHeight * 0.6);
-});
-
-// Parallax Hero
-const heroTitle = document.getElementById('heroTitle');
-window.addEventListener('scroll', () => {
-  const y = window.scrollY;
-  if (heroTitle) heroTitle.style.transform = `translateY(${y * 0.15}px)`;
-});
+let scrollQueued = false;
+function onScroll() {
+  if (scrollQueued) return;
+  scrollQueued = true;
+  requestAnimationFrame(() => {
+    const y = window.scrollY;
+    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    nav.classList.toggle('scrolled', y > 50);
+    if (scrollProgress) scrollProgress.style.transform = `scaleX(${height ? y / height : 0})`;
+    const showFloat = y > 120;
+    floatCta.classList.toggle('visible', showFloat);
+    whatsappFloat.classList.toggle('visible', showFloat);
+    backTop.classList.toggle('visible', y > window.innerHeight * 0.6);
+    scrollQueued = false;
+  });
+}
+window.addEventListener('scroll', onScroll, { passive: true });
+onScroll();
 
 // Intersection Observer for reveals and skills
 const observerOptions = { threshold: 0.15, rootMargin: '0px 0px -50px 0px' };
