@@ -113,16 +113,13 @@ h1 em { font-style: italic; color: var(--gold-2); }
 .frame {
   background: #0a101c; border: 1px solid var(--line); border-radius: 18px; overflow: hidden;
   box-shadow: 0 30px 80px rgba(0,0,0,0.45), 0 0 0 1px rgba(224,184,74,0.08);
-  transform: rotate(1.2deg);
-  transition: transform 0.35s var(--ease);
 }
-.frame:hover { transform: rotate(0) scale(1.02); }
 .chrome { display: flex; gap: 6px; padding: 10px 14px; background: #141c2c; border-bottom: 1px solid var(--line); }
 .chrome i { width: 9px; height: 9px; border-radius: 50%; background: #3a465c; display: block; }
 .chrome i:nth-child(1) { background: #ff5f57; }
 .chrome i:nth-child(2) { background: #febc2e; }
 .chrome i:nth-child(3) { background: #28c840; }
-.frame img { display: block; width: 100%; }
+.frame img { display: block; width: 100%; height: auto; image-rendering: auto; cursor: zoom-in; }
 
 .rail {
   overflow: hidden; border-block: 1px solid var(--line); padding: 0.9rem 0; margin-top: 2.5rem;
@@ -182,11 +179,12 @@ h2 em { font-style: italic; color: var(--gold-2); }
 
 .shot {
   border-radius: 16px; overflow: hidden; border: 1px solid var(--line);
-  box-shadow: 0 24px 50px rgba(0,0,0,0.4);
-  transition: transform 0.3s var(--ease);
+  box-shadow: 0 24px 50px rgba(0,0,0,0.4); background: #0a101c; cursor: zoom-in;
 }
-.shot:hover { transform: translateY(-8px) scale(1.015); }
-.shot img { display: block; width: 100%; }
+.shot img {
+  display: block; width: 100%; height: auto; max-width: 100%;
+  image-rendering: auto; -webkit-backface-visibility: hidden;
+}
 
 .wide { margin-top: 1.6rem; }
 
@@ -202,10 +200,28 @@ h2 em { font-style: italic; color: var(--gold-2); }
 
 .demo {
   background: radial-gradient(1200px 400px at 50% 0%, rgba(224,184,74,0.12), transparent 55%), var(--panel);
-  border: 1px solid var(--line); border-radius: 28px; padding: 2.4rem 2rem;
+  border: 1px solid var(--line); border-radius: 28px; padding: 2.6rem 2rem; text-align: center;
 }
 .demo h2 { text-align: center; }
 .demo .sub { text-align: center; margin-inline: auto; }
+.overlay {
+  position: fixed; inset: 0; z-index: 90; display: none;
+  background: rgba(4,8,16,0.78); backdrop-filter: blur(10px);
+  align-items: center; justify-content: center; padding: 1.5rem;
+}
+.overlay.open { display: flex; }
+.modal {
+  width: min(720px, 100%); max-height: 92vh; overflow: auto;
+  background: var(--panel); border: 1px solid var(--line); border-radius: 22px; padding: 1.6rem 1.4rem 1.4rem;
+  position: relative; box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+}
+.modal h3 { font-family: 'Cormorant Garamond', serif; font-size: 2rem; margin-bottom: 0.4rem; }
+.modal .sub { margin-bottom: 1.2rem; }
+.close {
+  position: absolute; top: 12px; right: 14px; width: 36px; height: 36px; border-radius: 50%;
+  border: 1px solid var(--line); background: transparent; color: var(--text); cursor: pointer; font-size: 1.2rem;
+}
+.lightbox img { max-width: min(1600px, 96vw); max-height: 90vh; width: auto; height: auto; object-fit: contain; border-radius: 10px; box-shadow: 0 20px 60px #000; image-rendering: auto; }
 form { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; max-width: 740px; margin: 0 auto; }
 form .full { grid-column: 1 / -1; }
 label { display: block; font-family: 'IBM Plex Mono', monospace; font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.4rem; }
@@ -256,7 +272,7 @@ footer a:hover { color: var(--gold); }
     <li><a href="../index.html">Projects</a></li>
     <li><a href="#modules">Modules</a></li>
     <li><a href="#accounts">Accounts</a></li>
-    <li><a href="#demo" class="cta">Request demo</a></li>
+    <li><a href="#demo" class="cta js-demo">Request demo</a></li>
   </ul>
 </nav>
 
@@ -267,13 +283,13 @@ footer a:hover { color: var(--gold); }
       <h1>The parish,<br>on one <em>quiet desk.</em></h1>
       <p class="lede">Members, Sunday receipts, automatic wishes, property and sacramental registers — built around how your church already works. Accounts stay optional. Switch them on and they are included.</p>
       <div class="actions">
-        <a class="btn btn-gold" href="#demo">Request demo login</a>
+        <a class="btn btn-gold js-demo" href="#demo">Request demo login</a>
         <a class="btn btn-ghost" href="#modules">Explore modules</a>
       </div>
     </div>
     <div class="frame">
       <div class="chrome"><i></i><i></i><i></i></div>
-      <img src="../../uploads/cms/login.png" alt="Church Management System login for CSITA St. Paul’s Pastorate">
+      <img src="../../uploads/cms/login.png" alt="Church Management System login for CSITA St. Paul’s Pastorate" width="762" height="809">
     </div>
   </div>
   <div class="rail" aria-hidden="true">
@@ -460,32 +476,45 @@ footer a:hover { color: var(--gold); }
   <div class="wrap">
     <div class="demo">
       <h2>Walk a sample parish.</h2>
-      <p class="sub">We email a 3-day user id and password. The sample database is flushed after three days. A public walkthrough at /my-projects/church-cms/demo comes later.</p>
-      <form id="demoForm">
-        <input class="hp" type="text" name="_gotcha" tabindex="-1" autocomplete="off">
-        <div><label for="demoName">Your name</label><input id="demoName" name="name" required placeholder="David Jones" autocomplete="name"></div>
-        <div><label for="demoChurch">Church / organisation</label><input id="demoChurch" name="church" required placeholder="St. Paul’s Church"></div>
-        <div><label for="demoEmail">Email</label><input id="demoEmail" name="email" type="email" required placeholder="you@church.org" autocomplete="email"></div>
-        <div><label for="demoPhone">WhatsApp / phone</label><input id="demoPhone" name="phone" type="tel" required placeholder="+91 99940 73545" autocomplete="tel"></div>
-        <div>
-          <label for="demoRole">Your role</label>
-          <select id="demoRole" name="role" required>
-            <option value="">Select</option>
-            <option>Treasurer</option>
-            <option>Secretary</option>
-            <option>Presbyter</option>
-            <option>Office / Admin</option>
-            <option>Other</option>
-          </select>
-        </div>
-        <div><label for="demoCity">City</label><input id="demoCity" name="city" placeholder="Trichy"></div>
-        <div class="full"><button class="btn btn-gold" type="submit" id="demoSubmit" style="width:100%">Request demo login</button></div>
-      </form>
-      <div class="ok" id="formOk">Request sent. We will email your demo login to the address you entered.</div>
-      <div class="err" id="formErr"></div>
+      <p class="sub">Click below to send your details. We email a 3-day user id and password. The sample database is flushed after three days.</p>
+      <button type="button" class="btn btn-gold js-demo">Request demo login</button>
     </div>
   </div>
 </section>
+
+<div class="overlay" id="demoOverlay" role="dialog" aria-modal="true" aria-labelledby="demoTitle">
+  <div class="modal">
+    <button type="button" class="close" id="demoClose" aria-label="Close">×</button>
+    <h3 id="demoTitle">Request demo login</h3>
+    <p class="sub">We’ll email a user id and password. Access lasts 3 days.</p>
+    <form id="demoForm">
+      <input class="hp" type="text" name="_gotcha" tabindex="-1" autocomplete="off">
+      <div><label for="demoName">Your name</label><input id="demoName" name="name" required placeholder="David Jones" autocomplete="name"></div>
+      <div><label for="demoChurch">Church / organisation</label><input id="demoChurch" name="church" required placeholder="St. Paul’s Church"></div>
+      <div><label for="demoEmail">Email</label><input id="demoEmail" name="email" type="email" required placeholder="you@church.org" autocomplete="email"></div>
+      <div><label for="demoPhone">WhatsApp / phone</label><input id="demoPhone" name="phone" type="tel" required placeholder="+91 99940 73545" autocomplete="tel"></div>
+      <div>
+        <label for="demoRole">Your role</label>
+        <select id="demoRole" name="role" required>
+          <option value="">Select</option>
+          <option>Treasurer</option>
+          <option>Secretary</option>
+          <option>Presbyter</option>
+          <option>Office / Admin</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div><label for="demoCity">City</label><input id="demoCity" name="city" placeholder="Trichy"></div>
+      <div class="full"><button class="btn btn-gold" type="submit" id="demoSubmit" style="width:100%">Send request</button></div>
+    </form>
+    <div class="ok" id="formOk">Request sent. We will email your demo login to the address you entered.</div>
+    <div class="err" id="formErr"></div>
+  </div>
+</div>
+<div class="overlay lightbox" id="zoomOverlay">
+  <button type="button" class="close" id="zoomClose" aria-label="Close">×</button>
+  <img id="zoomImg" alt="Enlarged screenshot">
+</div>
 
 <footer>
   <div><strong>Zion Solutions</strong> · Samuel Kanagaraj · India</div>
@@ -520,6 +549,35 @@ document.querySelectorAll('[data-slider]').forEach(root => {
   };
   root.querySelector('[data-next]')?.addEventListener('click', () => show(i + 1));
   root.querySelector('[data-prev]')?.addEventListener('click', () => show(i - 1));
+});
+
+const demoOverlay = document.getElementById('demoOverlay');
+const openDemo = (e) => {
+  if (e) e.preventDefault();
+  demoOverlay.classList.add('open');
+  document.getElementById('demoName').focus();
+};
+const closeDemo = () => demoOverlay.classList.remove('open');
+document.querySelectorAll('.js-demo').forEach(el => el.addEventListener('click', openDemo));
+document.getElementById('demoClose').addEventListener('click', closeDemo);
+demoOverlay.addEventListener('click', e => { if (e.target === demoOverlay) closeDemo(); });
+if (location.hash === '#demo' || new URLSearchParams(location.search).has('demo')) openDemo();
+
+const zoomOverlay = document.getElementById('zoomOverlay');
+const zoomImg = document.getElementById('zoomImg');
+document.querySelectorAll('.shot img, .frame img').forEach(img => {
+  img.addEventListener('click', () => {
+    zoomImg.src = img.currentSrc || img.src;
+    zoomImg.alt = img.alt;
+    zoomOverlay.classList.add('open');
+  });
+});
+document.getElementById('zoomClose').addEventListener('click', () => zoomOverlay.classList.remove('open'));
+zoomOverlay.addEventListener('click', e => { if (e.target !== zoomImg) zoomOverlay.classList.remove('open'); });
+document.addEventListener('keydown', e => {
+  if (e.key !== 'Escape') return;
+  closeDemo();
+  zoomOverlay.classList.remove('open');
 });
 
 document.getElementById('demoForm').addEventListener('submit', async (e) => {
@@ -559,7 +617,7 @@ document.getElementById('demoForm').addEventListener('submit', async (e) => {
     err.style.display = 'block';
   } finally {
     btn.disabled = false;
-    btn.textContent = 'Request demo login';
+    btn.textContent = 'Send request';
   }
 });
 </script>

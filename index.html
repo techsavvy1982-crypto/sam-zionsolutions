@@ -500,7 +500,10 @@ section .inner { max-width: 1100px; margin: 0 auto; position: relative; z-index:
   font-size: 0.72rem; font-weight: 500; padding: 0.4rem 1rem; border-radius: var(--radius-pill);
   transition: all 0.2s;
 }
-.service-card:hover .service-tag { background: var(--clay-soft); border-color: var(--clay-soft); color: var(--clay); }
+a.service-card { text-decoration: none; color: inherit; display: block; }
+.service-card .card-link {
+  display: inline-flex; margin-top: 1rem; color: var(--clay); font-weight: 600; font-size: 0.85rem;
+}
 
 /* ── ENGAGEMENT ── */
 .engage-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; }
@@ -889,7 +892,7 @@ footer .links a:hover { color: var(--clay); }
       </p>
       <div class="hero-actions">
         <a href="#contact" class="btn-pill btn-pill-clay">Start a Project</a>
-        <a href="#services" class="btn-pill btn-pill-outline">View Services</a>
+        <a href="my-projects/church-cms/?demo=1" class="btn-pill btn-pill-outline">Church CMS</a>
       </div>
     </div>
     <div class="hero-right">
@@ -948,7 +951,7 @@ footer .links a:hover { color: var(--clay); }
         <p>Complete professional website with built-in content management. Update events, sermons, and announcements yourself.</p>
         <div class="service-card-tags"><span class="service-tag">CMS</span><span class="service-tag">Mobile</span><span class="service-tag">SEO</span></div>
       </div>
-      <div class="service-card stagger" data-delay="2">
+      <a class="service-card stagger" data-delay="2" href="my-projects/church-cms/">
         <div class="service-card-top">
           <div class="service-card-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
@@ -958,8 +961,8 @@ footer .links a:hover { color: var(--clay); }
         <h3>Church Management System</h3>
         <p>Custom-built software to manage members, attendance, donations, and ministry activities exactly how your church works.</p>
         <div class="service-card-tags"><span class="service-tag">Members</span><span class="service-tag">Donations</span><span class="service-tag">Reports</span></div>
-        <p style="margin-top:1rem;"><a href="my-projects/church-cms/" style="color:var(--clay);font-weight:600;font-size:0.85rem;text-decoration:none;">View project →</a></p>
-      </div>
+        <span class="card-link">Open CMS project →</span>
+      </a>
       <div class="service-card stagger" data-delay="3">
         <div class="service-card-top">
           <div class="service-card-icon">
