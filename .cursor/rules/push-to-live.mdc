@@ -1,0 +1,14 @@
+---
+description: After site changes, commit and push to GitHub Pages without waiting to be asked.
+alwaysApply: true
+---
+
+# Push live after changes
+
+When you finish website or content work in this repo:
+
+1. Commit the relevant files (do not commit secrets or `.env`).
+2. Push to `origin` `main` so GitHub Pages updates https://sam-zionsolutions.com.
+3. Use remote `techsavvy1982-crypto/sam-zionsolutions`. Never use the St. Paul’s GitHub account.
+
+Treat this as a standing request. Do not wait for “push” or “go ahead” after a completed change.
