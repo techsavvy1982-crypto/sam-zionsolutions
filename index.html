@@ -464,12 +464,11 @@ section .inner { max-width: 1100px; margin: 0 auto; position: relative; z-index:
 }
 .service-card {
   background:
-    linear-gradient(125deg, rgba(255,255,255,0.92) 0%, rgba(255,255,255,0.18) 32%, transparent 52%),
-    radial-gradient(90% 70% at 100% 0%, rgba(13,148,136,0.14), transparent 55%),
-    linear-gradient(165deg, #ffffff 0%, #f4fffb 42%, #e6f7f2 100%);
+    linear-gradient(180deg, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0) 40%),
+    linear-gradient(165deg, #ffffff 0%, #f7fffc 100%);
   border-radius: var(--radius); padding: 2.5rem;
-  border: 1px solid rgba(13, 148, 136, 0.16);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.95), 0 10px 28px rgba(4, 47, 46, 0.07);
+  border: 1px solid rgba(13, 148, 136, 0.2);
+  box-shadow: inset 0 1px 0 #fff, 0 8px 20px rgba(13, 148, 136, 0.1);
   transition: transform 0.5s var(--ease-out), box-shadow 0.5s var(--ease-out), border-color 0.5s var(--ease-out);
   position: relative; overflow: hidden;
 }
@@ -481,11 +480,10 @@ section .inner { max-width: 1100px; margin: 0 auto; position: relative; z-index:
 .service-card:hover {
   transform: translateY(-8px);
   border-color: var(--clay);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,1), 0 22px 44px rgba(13, 148, 136, 0.16);
+  box-shadow: inset 0 1px 0 #fff, 0 16px 32px rgba(13, 148, 136, 0.16);
   background:
-    linear-gradient(125deg, rgba(255,255,255,0.96) 0%, rgba(255,255,255,0.22) 34%, transparent 54%),
-    radial-gradient(90% 70% at 100% 0%, rgba(13,148,136,0.22), transparent 55%),
-    linear-gradient(165deg, #ffffff 0%, #ecfdf5 40%, #ccfbf1 100%);
+    linear-gradient(180deg, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0) 42%),
+    linear-gradient(165deg, #ffffff 0%, #ecfdf5 100%);
 }
 .service-card-top {
   display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.5rem;
@@ -518,12 +516,11 @@ a.service-card { text-decoration: none; color: inherit; display: block; }
   display: inline-flex; margin-top: 1rem; color: var(--clay); font-weight: 600; font-size: 0.85rem;
 }
 a.service-card-cms {
-  border-color: rgba(13, 148, 136, 0.4);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.95), 0 10px 28px rgba(13, 148, 136, 0.16);
+  border-color: rgba(13, 148, 136, 0.35);
+  box-shadow: inset 0 1px 0 #fff, 0 8px 22px rgba(13, 148, 136, 0.14);
   background:
-    linear-gradient(125deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.2) 30%, transparent 50%),
-    radial-gradient(90% 70% at 0% 0%, rgba(13,148,136,0.22), transparent 55%),
-    linear-gradient(165deg, #f0fdfa 0%, #ccfbf1 58%, #99f6e4 130%);
+    linear-gradient(180deg, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 38%),
+    linear-gradient(165deg, #ffffff 0%, #e6faf5 100%);
 }
 a.service-card-cms::before { transform: scaleX(1); }
 a.service-card-cms::after {
@@ -567,12 +564,11 @@ a.service-card-cms::after {
 .engage-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; }
 .engage-card {
   background:
-    linear-gradient(125deg, rgba(255,255,255,0.92) 0%, rgba(255,255,255,0.18) 32%, transparent 52%),
-    radial-gradient(80% 60% at 50% 0%, rgba(13,148,136,0.12), transparent 55%),
-    linear-gradient(180deg, #ffffff 0%, #f5fffb 50%, #e8f8f3 100%);
+    linear-gradient(180deg, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0) 40%),
+    linear-gradient(180deg, #ffffff 0%, #f7fffc 100%);
   border-radius: var(--radius); padding: 2.5rem 2rem;
-  border: 1px solid rgba(13, 148, 136, 0.16);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.95), 0 10px 28px rgba(4, 47, 46, 0.07);
+  border: 1px solid rgba(13, 148, 136, 0.2);
+  box-shadow: inset 0 1px 0 #fff, 0 8px 20px rgba(13, 148, 136, 0.1);
   transition: transform 0.5s var(--ease-out), box-shadow 0.5s var(--ease-out);
   text-align: center; position: relative; overflow: hidden;
 }
@@ -582,7 +578,7 @@ a.service-card-cms::after {
   transition: transform 0.5s var(--ease-out); transform-origin: center;
 }
 .engage-card:hover::after { transform: translateX(-50%) scaleX(1); }
-.engage-card:hover { transform: translateY(-6px); box-shadow: inset 0 1px 0 rgba(255,255,255,1), var(--shadow-hover); }
+.engage-card:hover { transform: translateY(-6px); box-shadow: inset 0 1px 0 #fff, 0 16px 32px rgba(13, 148, 136, 0.14); }
 .engage-num {
   font-family: 'Outfit', sans-serif; font-size: 3rem; font-weight: 800; color: var(--border);
   line-height: 1; margin-bottom: 1.25rem; transition: color 0.3s;
@@ -665,17 +661,17 @@ a.service-card-cms::after {
 .trust-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; }
 .trust-card {
   background:
-    linear-gradient(125deg, rgba(255,255,255,0.92) 0%, rgba(255,255,255,0.18) 32%, transparent 52%),
-    radial-gradient(90% 70% at 0% 0%, rgba(13,148,136,0.14), transparent 55%),
-    linear-gradient(165deg, #ffffff 0%, #f4fffb 42%, #e6f7f2 100%);
-  border: 1px solid rgba(13, 148, 136, 0.16);
+    linear-gradient(180deg, rgba(255,255,255,0.75) 0%, rgba(255,255,255,0) 40%),
+    linear-gradient(165deg, #ffffff 0%, #f7fffc 100%);
+  border: 1px solid rgba(13, 148, 136, 0.22);
   border-radius: var(--radius); padding: 2.5rem;
   transition: transform 0.5s var(--ease-out), box-shadow 0.5s var(--ease-out), border-color 0.5s var(--ease-out);
   position: relative; overflow: hidden;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.95), 0 10px 28px rgba(0,0,0,0.12);
+  box-shadow: inset 0 1px 0 #fff, 0 8px 22px rgba(13, 148, 136, 0.18);
 }
 .trust-card:hover {
-  border-color: var(--clay); transform: translateY(-6px); box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+  border-color: var(--clay); transform: translateY(-6px);
+  box-shadow: inset 0 1px 0 #fff, 0 16px 36px rgba(13, 148, 136, 0.28);
 }
 .trust-card-icon {
   width: 48px; height: 48px; border-radius: var(--radius-sm); background: var(--clay-soft);
