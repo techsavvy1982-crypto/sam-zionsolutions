@@ -234,6 +234,19 @@ input, select {
 }
 input:focus, select:focus { border-color: var(--gold); transform: scale(1.01); }
 select option { color: #111; }
+.combo { position: relative; }
+.combo.open input { border-radius: 12px 12px 0 0; }
+.combo-list {
+  position: absolute; left: 0; right: 0; top: 100%; z-index: 3; margin: 0;
+  padding: 0.3rem; list-style: none; background: #0a101c;
+  border: 1px solid var(--gold); border-top: 0; border-radius: 0 0 12px 12px;
+}
+.combo-list button {
+  display: block; width: 100%; text-align: left; background: transparent; border: 0;
+  color: var(--text); padding: 0.55rem 0.8rem; border-radius: 8px; cursor: pointer;
+  font-family: Outfit, sans-serif; font-size: 0.92rem;
+}
+.combo-list button:hover, .combo-list button:focus { background: rgba(255,122,89,0.16); outline: none; }
 .ok, .err { display: none; margin: 1rem auto 0; max-width: 740px; padding: 0.9rem 1rem; border-radius: 12px; text-align: center; }
 .ok { border: 1px solid #3dff9c; color: #b7ffd8; }
 .err { border: 1px solid #fca5a5; color: #fecaca; }
@@ -270,6 +283,7 @@ footer a:hover { color: var(--gold); }
     <span>Zion Solutions<small>CHURCH CMS</small></span>
   </a>
   <ul class="links">
+    <li><a href="../../index.html">Home</a></li>
     <li><a href="../index.html">Projects</a></li>
     <li><a href="#modules">Modules</a></li>
     <li><a href="#accounts">Accounts</a></li>
@@ -490,22 +504,21 @@ footer a:hover { color: var(--gold); }
     <p class="sub">We’ll email a user id and password. Access lasts 3 days.</p>
     <form id="demoForm">
       <input class="hp" type="text" name="_gotcha" tabindex="-1" autocomplete="off">
-      <div><label for="demoName">Your name</label><input id="demoName" name="name" required placeholder="David Jones" autocomplete="name"></div>
-      <div><label for="demoChurch">Church / organisation</label><input id="demoChurch" name="church" required placeholder="St. Paul’s Church"></div>
-      <div><label for="demoEmail">Email</label><input id="demoEmail" name="email" type="email" required placeholder="you@church.org" autocomplete="email"></div>
-      <div><label for="demoPhone">WhatsApp / phone</label><input id="demoPhone" name="phone" type="tel" required placeholder="+91 99940 73545" autocomplete="tel"></div>
-      <div>
+      <div><label for="demoName">Your name</label><input id="demoName" name="name" required autocomplete="name"></div>
+      <div><label for="demoChurch">Church / organisation</label><input id="demoChurch" name="church" required></div>
+      <div><label for="demoEmail">Email</label><input id="demoEmail" name="email" type="email" required autocomplete="email"></div>
+      <div><label for="demoPhone">WhatsApp / phone</label><input id="demoPhone" name="phone" type="tel" required autocomplete="tel"></div>
+      <div class="combo" id="roleCombo">
         <label for="demoRole">Your role</label>
-        <select id="demoRole" name="role" required>
-          <option value="">Select</option>
-          <option>Treasurer</option>
-          <option>Secretary</option>
-          <option>Presbyter</option>
-          <option>Office / Admin</option>
-          <option>Other</option>
-        </select>
+        <input id="demoRole" name="role" required autocomplete="off" aria-autocomplete="list" aria-expanded="false" aria-controls="roleList">
+        <ul class="combo-list" id="roleList" hidden>
+          <li><button type="button">Presbyter</button></li>
+          <li><button type="button">Secretary</button></li>
+          <li><button type="button">Treasurer</button></li>
+          <li><button type="button">PC Member</button></li>
+        </ul>
       </div>
-      <div><label for="demoCity">City</label><input id="demoCity" name="city" placeholder="Trichy"></div>
+      <div><label for="demoCity">City</label><input id="demoCity" name="city"></div>
       <div class="full"><button class="btn btn-gold" type="submit" id="demoSubmit" style="width:100%">Send request</button></div>
     </form>
     <div class="ok" id="formOk">Request sent. We will email your demo login to the address you entered.</div>
@@ -580,6 +593,40 @@ document.addEventListener('keydown', e => {
   closeDemo();
   zoomOverlay.classList.remove('open');
 });
+
+(function () {
+  const input = document.getElementById('demoRole');
+  const list = document.getElementById('roleList');
+  const wrap = document.getElementById('roleCombo');
+  const items = [...list.querySelectorAll('li')];
+  const open = () => {
+    wrap.classList.add('open');
+    list.hidden = false;
+    input.setAttribute('aria-expanded', 'true');
+  };
+  const close = () => {
+    wrap.classList.remove('open');
+    list.hidden = true;
+    input.setAttribute('aria-expanded', 'false');
+  };
+  const filter = () => {
+    const q = input.value.trim().toLowerCase();
+    items.forEach(li => {
+      li.hidden = q !== '' && !li.textContent.trim().toLowerCase().includes(q);
+    });
+    open();
+  };
+  input.addEventListener('focus', () => { items.forEach(li => { li.hidden = false; }); open(); });
+  input.addEventListener('input', filter);
+  list.querySelectorAll('button').forEach(btn => {
+    btn.addEventListener('mousedown', e => {
+      e.preventDefault();
+      input.value = btn.textContent.trim();
+      close();
+    });
+  });
+  document.addEventListener('mousedown', e => { if (!wrap.contains(e.target)) close(); });
+})();
 
 document.getElementById('demoForm').addEventListener('submit', async (e) => {
   e.preventDefault();
