@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-L01Q1EC8TN"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-L01Q1EC8TN');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Church Management System — Zion Solutions</title>
+<meta name="description" content="Custom Church Management System: members, automatic birthday & anniversary wishes, phone directory, assets, sacramental registers, receipts, and optional accounts. In use at St. Paul’s, Woraiyur.">
+<meta property="og:title" content="Church Management System — Zion Solutions">
+<meta property="og:description" content="Operations software built around how your church actually works — members, Sunday receipts, records, property, and books if you want them.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://sam-zionsolutions.com/my-projects/church-cms/">
+<meta property="og:image" content="https://sam-zionsolutions.com/uploads/cms/dashboard.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #ffffff; --paper-deep: #f8fafc; --ink: #042f2e; --ink-soft: #064e3b;
+  --stone: #475569; --stone-light: #94a3b8; --clay: #0d9488; --clay-soft: #f0fdfa;
+  --sage: #0f766e; --sand: #5eead4; --border: #e2e8f0; --border-light: #f1f5f9;
+  --white: #ffffff; --shadow: 0 8px 32px rgba(4, 47, 46, 0.06);
+  --shadow-hover: 0 16px 48px rgba(4, 47, 46, 0.1);
+  --ease-out: cubic-bezier(0.25, 0.46, 0.45, 0.94); --radius: 24px; --radius-sm: 16px; --radius-pill: 999px;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Inter', sans-serif; color: var(--ink); background: var(--paper); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+a { color: inherit; }
+.scroll-progress { position: fixed; top: 0; left: 0; height: 3px; background: var(--clay); z-index: 1000; width: 0; }
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 0 5%; height: 72px;
+  display: flex; align-items: center; justify-content: space-between;
+  background: rgba(255,255,255,0.95); backdrop-filter: blur(12px);
+  box-shadow: 0 1px 0 var(--border-light); color: var(--ink);
+}
+.nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+.nav-logo-mark {
+  width: 44px; height: 44px; border-radius: 50%; background: var(--clay); color: var(--paper);
+  display: flex; align-items: center; justify-content: center;
+}
+.nav-logo-mark svg { width: 22px; height: 22px; }
+.nav-logo-text { font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 1.1rem; color: var(--ink); }
+.nav-logo-text span { font-weight: 300; color: var(--stone); }
+.nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; }
+.nav-links a { font-size: 0.85rem; font-weight: 500; color: var(--stone); text-decoration: none; }
+.nav-links a:hover { color: var(--clay); }
+.nav-cta {
+  background: var(--ink); color: var(--paper) !important; padding: 0.6rem 1.5rem;
+  border-radius: var(--radius-pill); font-weight: 600 !important; font-size: 0.8rem !important; text-decoration: none;
+}
+.inner { max-width: 1120px; margin: 0 auto; }
+.section-eyebrow {
+  font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; font-weight: 500;
+  color: var(--clay); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 1rem;
+}
+.section-heading { font-family: 'Outfit', sans-serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 300; letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 1rem; }
+.section-heading strong { font-weight: 700; }
+.section-body { font-size: 1.05rem; color: var(--stone); max-width: 640px; margin-bottom: 2rem; }
+.hero {
+  padding: 8.5rem 5% 4.5rem;
+  background: linear-gradient(135deg, #011c16 0%, #042f2e 40%, #065f46 100%);
+  color: var(--white);
+}
+.hero-grid { display: grid; grid-template-columns: 1fr 1.05fr; gap: 3rem; align-items: center; max-width: 1120px; margin: 0 auto; }
+.hero h1 { font-family: 'Outfit', sans-serif; font-size: clamp(2.4rem, 5vw, 3.8rem); font-weight: 300; line-height: 1.08; margin: 1rem 0 1.25rem; }
+.hero h1 strong { font-weight: 700; color: var(--sand); }
+.hero p { color: rgba(255,255,255,0.72); font-size: 1.08rem; max-width: 480px; margin-bottom: 1.75rem; }
+.live-badge {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(16, 185, 129, 0.25);
+  padding: 0.4rem 1rem; border-radius: var(--radius-pill);
+  font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; color: #6ee7b7; text-transform: uppercase; letter-spacing: 0.05em;
+}
+.live-dot { width: 8px; height: 8px; border-radius: 50%; background: #10b981; }
+.hero-actions { display: flex; gap: 0.8rem; flex-wrap: wrap; }
+.btn-pill {
+  padding: 0.9rem 1.8rem; border-radius: var(--radius-pill); font-family: 'Outfit', sans-serif;
+  font-size: 0.85rem; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center;
+}
+.btn-pill-clay { background: var(--white); color: var(--ink); }
+.btn-pill-outline { background: transparent; color: var(--white); border: 1.5px solid rgba(255,255,255,0.3); }
+.shot {
+  border-radius: 18px; overflow: hidden; box-shadow: 0 24px 60px rgba(0,0,0,0.35);
+  border: 1px solid rgba(255,255,255,0.12); background: #0b1220;
+}
+.shot img { display: block; width: 100%; height: auto; }
+.shot-light { box-shadow: var(--shadow-hover); border: 1px solid var(--border); background: var(--paper); }
+section { padding: 4.5rem 5%; }
+.alt { background: var(--paper-deep); background-image: radial-gradient(var(--border) 0.8px, transparent 0.8px); background-size: 32px 32px; }
+.pillar-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+.pillar {
+  display: block; background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-sm);
+  padding: 1.25rem 1.2rem; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s;
+}
+.pillar:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+.pillar span { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; color: var(--clay); letter-spacing: 0.08em; }
+.pillar h3 { font-family: 'Outfit', sans-serif; font-size: 1.05rem; margin: 0.35rem 0 0.4rem; }
+.pillar p { font-size: 0.85rem; color: var(--stone); }
+.mod { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+.mod.reverse { direction: rtl; }
+.mod.reverse > * { direction: ltr; }
+.slides { position: relative; min-height: 11rem; }
+.slide { display: none; }
+.slide.active { display: block; animation: fade 0.35s ease; }
+@keyframes fade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+.slide h3 { font-family: 'Outfit', sans-serif; font-size: 1.35rem; margin-bottom: 0.6rem; }
+.slide p { color: var(--stone); }
+.slide-nav { display: flex; gap: 0.5rem; margin: 1.1rem 0 1.4rem; }
+.slide-nav button {
+  width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--border); background: var(--white);
+  cursor: pointer; color: var(--ink); font-size: 1rem;
+}
+.dots { display: flex; gap: 6px; align-items: center; }
+.dots i { width: 7px; height: 7px; border-radius: 50%; background: var(--border); display: block; }
+.dots i.on { background: var(--clay); width: 18px; border-radius: 99px; }
+.bullets { list-style: none; display: grid; gap: 0.55rem; }
+.bullets li { padding-left: 1.2rem; position: relative; font-size: 0.92rem; color: var(--ink-soft); }
+.bullets li::before { content: ''; position: absolute; left: 0; top: 0.55rem; width: 7px; height: 7px; border-radius: 50%; background: var(--clay); }
+.choice-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+.choice {
+  background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 1.4rem;
+}
+.choice h3 { font-family: 'Outfit', sans-serif; font-size: 1.15rem; margin-bottom: 0.5rem; }
+.choice p { font-size: 0.9rem; color: var(--stone); }
+.roles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+.role { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 1.1rem; }
+.role strong { display: block; font-family: 'Outfit', sans-serif; margin-bottom: 0.3rem; }
+.role span { font-size: 0.85rem; color: var(--stone); }
+.cta-box {
+  background: var(--ink); color: var(--white); border-radius: var(--radius); padding: 2.5rem; text-align: center;
+}
+.cta-box h2 { font-family: 'Outfit', sans-serif; font-size: 2rem; font-weight: 500; margin-bottom: 0.6rem; }
+.cta-box p { color: rgba(255,255,255,0.7); margin-bottom: 1.4rem; }
+footer {
+  background: var(--ink); color: rgba(255,255,255,0.45); padding: 3rem 5%;
+  display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem;
+}
+footer .brand { font-family: 'Outfit', sans-serif; font-size: 1.3rem; font-weight: 600; color: var(--paper); }
+footer .brand span { font-weight: 300; color: var(--stone-light); }
+footer a { color: rgba(255,255,255,0.4); text-decoration: none; font-size: 0.85rem; margin-left: 1.2rem; }
+footer a:hover { color: var(--clay); }
+@media (max-width: 900px) {
+  .hero-grid, .mod, .mod.reverse, .pillar-grid, .choice-grid, .roles { grid-template-columns: 1fr; }
+  .mod.reverse { direction: ltr; }
+  .nav-links { display: none; }
+}
+</style>
+</head>
+<body>
+<div class="scroll-progress" id="scrollProgress"></div>
+<nav aria-label="Main">
+  <a href="../../index.html" class="nav-logo">
+    <div class="nav-logo-mark">
+      <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 4 L34 11 L34 29 L20 36 L6 29 L6 11 Z"/><path d="M12 15 L28 15 L20 25 L28 25"/>
+      </svg>
+    </div>
+    <div class="nav-logo-text">Zion<span> Solutions</span></div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="../index.html">My Projects</a></li>
+    <li><a href="#modules">Modules</a></li>
+    <li><a href="#accounts">Accounts</a></li>
+    <li><a href="../../index.html#contact" class="nav-cta">Hire Geek Sam</a></li>
+  </ul>
+</nav>
+
+<header class="hero">
+  <div class="hero-grid">
+    <div>
+      <div class="live-badge"><span class="live-dot"></span> In use · St. Paul’s, Woraiyur</div>
+      <h1>Church operations.<br><strong>One system.</strong></h1>
+      <p>Members, Sunday receipts, automatic wishes, property, and sacramental registers — built around how your church already works. Accounts stay optional. If you switch them on, they are included.</p>
+      <div class="hero-actions">
+        <a class="btn-pill btn-pill-clay" href="https://wa.me/919994073545?text=Hi%20Samuel%2C%20I%20would%20like%20to%20request%20a%203-day%20CMS%20demo.">Request a 3-day demo</a>
+        <a class="btn-pill btn-pill-outline" href="#modules">See modules</a>
+      </div>
+    </div>
+    <figure class="shot">
+      <img src="../../uploads/cms/login.png" alt="Church Management System login for CSITA St. Paul’s Pastorate, Woraiyur">
+    </figure>
+  </div>
+</header>
+
+<section>
+  <div class="inner">
+    <div class="section-eyebrow">Who uses it</div>
+    <h2 class="section-heading">Built for the people<br><strong>who run Sunday.</strong></h2>
+    <div class="roles">
+      <div class="role"><strong>Treasurer</strong><span>Receipts, declarations, statements, books if you want them.</span></div>
+      <div class="role"><strong>Secretary</strong><span>Members, announcements, registers, committee lists.</span></div>
+      <div class="role"><strong>Presbyter</strong><span>Pastoral picture of the roll — baptism, confirmation, visits via records.</span></div>
+      <div class="role"><strong>Office</strong><span>Directory, assets, print, Excel — without a technician on site.</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="modules">
+  <div class="inner">
+    <div class="section-eyebrow">What’s in the box</div>
+    <h2 class="section-heading">More than a member list.<br><strong>Seven working areas.</strong></h2>
+    <p class="section-body">Jump to a section. Each one is a set of slides — not a dump of every button.</p>
+    <div class="pillar-grid">
+      <a class="pillar" href="#people"><span>01</span><h3>People</h3><p>The congregation register.</p></a>
+      <a class="pillar" href="#wishes"><span>02</span><h3>Automatic wishes</h3><p>Birthdays &amp; anniversaries on WhatsApp.</p></a>
+      <a class="pillar" href="#directory"><span>03</span><h3>Phone directory</h3><p>Vendors, diocese, hospitals — not the roll.</p></a>
+      <a class="pillar" href="#assets"><span>04</span><h3>Assets</h3><p>Movable, fixed, documents &amp; warranty alerts.</p></a>
+      <a class="pillar" href="#events"><span>05</span><h3>Events &amp; registers</h3><p>Planner plus baptism to burial.</p></a>
+      <a class="pillar" href="#finance"><span>06</span><h3>Sunday finance</h3><p>Declaration, receipts, UPI links.</p></a>
+      <a class="pillar" href="#accounts"><span>07</span><h3>Accounts</h3><p>Tally, Simple, or Advanced — your choice.</p></a>
+      <a class="pillar" href="#trust"><span>08</span><h3>Trust</h3><p>Roles, audit, backup.</p></a>
+    </div>
+  </div>
+</section>
+
+<section id="people">
+  <div class="inner mod">
+    <div data-slider>
+      <div class="section-eyebrow">People</div>
+      <div class="slides">
+        <div class="slide active">
+          <h3>Every family, remembered.</h3>
+          <p>Member and family IDs, photo, address, zone, work, denomination, baptism and confirmation, fellowships — one form that the rest of the system reads.</p>
+        </div>
+        <div class="slide">
+          <h3>The office can actually use it.</h3>
+          <p>Search, Excel export, bulk print, family records, and a restore path for deleted members. 883 active members on the live St. Paul’s dashboard.</p>
+        </div>
+      </div>
+      <div class="slide-nav">
+        <button type="button" data-prev aria-label="Previous">‹</button>
+        <span class="dots"><i class="on"></i><i></i></span>
+        <button type="button" data-next aria-label="Next">›</button>
+      </div>
+      <ul class="bullets">
+        <li>Personal + church details on one member form</li>
+        <li>Dashboard: families, gender, age bands, ministry participation</li>
+        <li>Feeds receipts, wishes, statements, and reports</li>
+      </ul>
+    </div>
+    <figure class="shot shot-light">
+      <img src="../../uploads/cms/members.png" alt="Member entry form with personal and church-related details">
+    </figure>
+  </div>
+  <div class="inner" style="margin-top:2.5rem;">
+    <figure class="shot shot-light">
+      <img src="../../uploads/cms/dashboard.png" alt="Dashboard showing membership statistics, gender, age groups, and ministry participation">
+    </figure>
+  </div>
+</section>
+
+<section class="alt" id="wishes">
+  <div class="inner" data-slider>
+    <div class="section-eyebrow">Automatic wishes</div>
+    <h2 class="section-heading">The card goes out.<br><strong>The office didn’t type it.</strong></h2>
+    <div class="slides" style="min-height:7rem;">
+      <div class="slide active">
+        <h3>Birthdays and anniversaries from the roll</h3>
+        <p>Upcoming seven days on one board. Send a WhatsApp greeting with a generated card and a Bible verse — English and Tamil in the verse library.</p>
+      </div>
+      <div class="slide">
+        <h3>Turn on the clock</h3>
+        <p>Auto greetings at a set time. Weekly report to office bearers on the day you choose. Manual send still available when you want to review first.</p>
+      </div>
+      <div class="slide">
+        <h3>You stay in control</h3>
+        <p>Skip list for members who should not be wished. Card templates, send log, PDF and Excel reports for any date range.</p>
+      </div>
+    </div>
+    <div class="slide-nav">
+      <button type="button" data-prev aria-label="Previous">‹</button>
+      <span class="dots"><i class="on"></i><i></i><i></i></span>
+      <button type="button" data-next aria-label="Next">›</button>
+    </div>
+    <ul class="bullets">
+      <li>WhatsApp card + verse, church name on the image</li>
+      <li>Auto or one-tap send</li>
+      <li>Weekly digest for treasurer / secretary</li>
+      <li>Exclusions and full history</li>
+    </ul>
+  </div>
+</section>
+
+<section id="directory">
+  <div class="inner" data-slider>
+    <div class="section-eyebrow">Phone directory</div>
+    <h2 class="section-heading">Everyone except<br><strong>the congregation roll.</strong></h2>
+    <div class="slides" style="min-height:7rem;">
+      <div class="slide active">
+        <h3>People and organisations</h3>
+        <p>Vendors, diocese, government, school, hospital, bank — contacts the office actually calls. This is not the member database.</p>
+      </div>
+      <div class="slide">
+        <h3>Your categories, your tree</h3>
+        <p>Nested categories you drag into place. Search, A–Z, phone, WhatsApp, email, notes. Excel export when the committee asks for a list.</p>
+      </div>
+    </div>
+    <div class="slide-nav">
+      <button type="button" data-prev aria-label="Previous">‹</button>
+      <span class="dots"><i class="on"></i><i></i></span>
+      <button type="button" data-next aria-label="Next">›</button>
+    </div>
+    <ul class="bullets">
+      <li>Separate from members on purpose</li>
+      <li>Role-gated; master password on sensitive actions</li>
+      <li>Changes land in the audit trail</li>
+    </ul>
+  </div>
+</section>
+
+<section class="alt" id="assets">
+  <div class="inner mod reverse">
+    <div data-slider>
+      <div class="section-eyebrow">Asset management</div>
+      <div class="slides">
+        <div class="slide active">
+          <h3>Paper that used to live in a cupboard.</h3>
+          <p>Invoices, warranty cards, contracts — stored, categorised, and watched. The Documents vault alerts before expiry (renew in 3 days, 10-day warning).</p>
+        </div>
+        <div class="slide">
+          <h3>Movable inventory</h3>
+          <p>One line per item, photo, location and type trees, condition, stock in / out / return.</p>
+        </div>
+        <div class="slide">
+          <h3>Fixed property</h3>
+          <p>Buildings and complex records, with documents attached. Tabs can be granted separately so not every login sees land papers.</p>
+        </div>
+      </div>
+      <div class="slide-nav">
+        <button type="button" data-prev aria-label="Previous">‹</button>
+        <span class="dots"><i class="on"></i><i></i><i></i></span>
+        <button type="button" data-next aria-label="Next">›</button>
+      </div>
+      <ul class="bullets">
+        <li>Active and archive (warranty ended)</li>
+        <li>Category tree: invoices, warranty, receipts, certificates, contracts</li>
+        <li>Preview the scan beside the record</li>
+      </ul>
+    </div>
+    <figure class="shot shot-light">
+      <img src="../../uploads/cms/assets.png" alt="Asset Management documents vault with warranty expiry alert">
+    </figure>
+  </div>
+</section>
+
+<section id="events">
+  <div class="inner mod">
+    <div data-slider>
+      <div class="section-eyebrow">Events &amp; registers</div>
+      <div class="slides">
+        <div class="slide active">
+          <h3>The register is not the calendar.</h3>
+          <p>Event Recorder keeps Baptism, Confirmation, Wedding, and Burial — serial numbers (0002/2026), dates, both parties, documents, bulk export.</p>
+        </div>
+        <div class="slide">
+          <h3>Planner for programmes</h3>
+          <p>Year, month, week, agenda, and Kanban. Recurring events, tasks, volunteers, WhatsApp, Excel. Different job from the sacramental books.</p>
+        </div>
+      </div>
+      <div class="slide-nav">
+        <button type="button" data-prev aria-label="Previous">‹</button>
+        <span class="dots"><i class="on"></i><i></i></span>
+        <button type="button" data-next aria-label="Next">›</button>
+      </div>
+      <ul class="bullets">
+        <li>Four registers in one module</li>
+        <li>Search by serial number</li>
+        <li>Colour-coded bride and groom columns on weddings</li>
+      </ul>
+    </div>
+    <figure class="shot shot-light">
+      <img src="../../uploads/cms/event-recorder.png" alt="Event Recorder wedding register with serial number and bride and groom details">
+    </figure>
+  </div>
+</section>
+
+<section class="alt" id="finance">
+  <div class="inner mod reverse">
+    <div data-slider>
+      <div class="section-eyebrow">Sunday finance</div>
+      <div class="slides">
+        <div class="slide active">
+          <h3>The receipt is the Sunday moment.</h3>
+          <p>Numbered receipt (FY 2026-27_002768), member lookup, months paid as a grid, cash / cheque / DD / net banking / UPI, category lines, WhatsApp PDF to the member.</p>
+        </div>
+        <div class="slide">
+          <h3>Before and after the counter</h3>
+          <p>Declarations for the year. Payment schedule (monthly to annual) and a public UPI pay link so the member can settle without logging in.</p>
+        </div>
+        <div class="slide">
+          <h3>Reports the PC meeting needs</h3>
+          <p>Member report, member statement, receipt report, auction with year-close, transfer report.</p>
+        </div>
+      </div>
+      <div class="slide-nav">
+        <button type="button" data-prev aria-label="Previous">‹</button>
+        <span class="dots"><i class="on"></i><i></i><i></i></span>
+        <button type="button" data-next aria-label="Next">›</button>
+      </div>
+      <ul class="bullets">
+        <li>Categories: subscription, fellowships, FBRF, village ministry, diocesan funds…</li>
+        <li>Always in the project — this is not the Accounts add-on</li>
+      </ul>
+    </div>
+    <figure class="shot shot-light">
+      <img src="../../uploads/cms/receipt.png" alt="New receipt window with months paid, payment methods, and category lines">
+    </figure>
+  </div>
+</section>
+
+<section id="accounts">
+  <div class="inner">
+    <div class="section-eyebrow">Accounts — optional</div>
+    <h2 class="section-heading">Keep Tally, or keep books<br><strong>in the CMS.</strong></h2>
+    <p class="section-body">Accounts are included when the church opts in — no extra price. Leave them off and continue in Tally. Receipts and members still run in the CMS.</p>
+    <div class="choice-grid">
+      <div class="choice">
+        <h3>Stay on Tally</h3>
+        <p>CMS for people and receipts. Books stay where your auditor already works.</p>
+      </div>
+      <div class="choice">
+        <h3>Simple Accounts</h3>
+        <p>Cash book in plain language. Money in, money out, categories, basic reports. For treasurers who are not accountants.</p>
+      </div>
+      <div class="choice">
+        <h3>Advanced Accounts</h3>
+        <p>Lock Single entry or Double entry. Chart of accounts, vouchers, trial balance, statements, budget vs actual. Multiple books — church, shopping complex, trust, school.</p>
+      </div>
+    </div>
+    <figure class="shot shot-light" style="margin-top:2rem;">
+      <img src="../../uploads/cms/accounts.png" alt="Advanced Accounts dashboard with cash, bank, surplus, and journal entries for CSI St. Paul’s Church">
+    </figure>
+  </div>
+</section>
+
+<section class="alt" id="trust">
+  <div class="inner">
+    <div class="section-eyebrow">Trust</div>
+    <h2 class="section-heading">Not everyone sees<br><strong>every screen.</strong></h2>
+    <ul class="bullets">
+      <li>Page-by-page permissions (Admin, User 1–4)</li>
+      <li>Audit trail across members, events, assets, finance</li>
+      <li>Recycle bin to restore mistakes</li>
+      <li>Full backup to Google Drive — Super Admin</li>
+      <li>License on live churches; demo access is issued by us, not public</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <div class="inner">
+    <div class="cta-box">
+      <h2>Walk through a sample church.</h2>
+      <p>Demo is not a public login. Request access on WhatsApp — we email a user id and password, and the sample database is flushed after 3 days. Later, that walkthrough will live at <span style="color:var(--sand);">sam-zionsolutions.com/my-projects/church-cms/demo</span>.</p>
+      <a class="btn-pill btn-pill-clay" href="https://wa.me/919994073545?text=Hi%20Samuel%2C%20please%20send%20CMS%20demo%20login.%20Name%3A%20%0AChurch%3A%20%0AEmail%3A%20">Request demo login</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div>
+    <div class="brand">Zion<span> Solutions</span></div>
+    <div>Samuel Kanagaraj · India</div>
+  </div>
+  <div>
+    <a href="../index.html">My Projects</a>
+    <a href="../../index.html">Home</a>
+    <a href="../../index.html#contact">Contact</a>
+  </div>
+</footer>
+<script>
+document.getElementById('scrollProgress') && window.addEventListener('scroll', () => {
+  const y = window.scrollY;
+  const h = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  document.getElementById('scrollProgress').style.width = (y / h) * 100 + '%';
+});
+document.querySelectorAll('[data-slider]').forEach(root => {
+  const slides = [...root.querySelectorAll('.slide')];
+  if (slides.length < 2) return;
+  const dots = [...root.querySelectorAll('.dots i')];
+  let i = 0;
+  function show(n) {
+    i = (n + slides.length) % slides.length;
+    slides.forEach((s, k) => s.classList.toggle('active', k === i));
+    dots.forEach((d, k) => d.classList.toggle('on', k === i));
+  }
+  root.querySelector('[data-next]')?.addEventListener('click', () => show(i + 1));
+  root.querySelector('[data-prev]')?.addEventListener('click', () => show(i - 1));
+});
+</script>
+</body>
+</html>
