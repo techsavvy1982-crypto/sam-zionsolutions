@@ -34,7 +34,7 @@
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: auto; scroll-padding-top: 96px; }
 body {
   font-family: Outfit, sans-serif;
   background: var(--bg);
@@ -53,9 +53,10 @@ body::before {
   background-size: auto, auto, 48px 48px, 48px 48px;
 }
 .bar {
-  position: fixed; top: 0; left: 0; height: 2px; width: 0;
+  position: fixed; top: 0; left: 0; height: 2px; width: 100%;
   background: linear-gradient(90deg, var(--gold), var(--blue));
   z-index: 80; box-shadow: 0 0 16px var(--gold);
+  transform: scaleX(0); transform-origin: left;
 }
 nav {
   position: fixed; inset: 18px 4% auto; z-index: 70;
@@ -260,8 +261,15 @@ footer strong { color: var(--text); font-weight: 600; }
 footer a { color: var(--muted); text-decoration: none; margin-left: 1.1rem; }
 footer a:hover { color: var(--gold); }
 
-.js { opacity: 0; transform: translateY(28px); transition: opacity 0.45s var(--ease), transform 0.45s var(--ease); }
-.js.in { opacity: 1; transform: none; }
+.js { opacity: 0; }
+.js.in {
+  opacity: 1;
+  animation: rise-in 0.55s var(--ease) backwards;
+}
+@keyframes rise-in {
+  from { opacity: 0; transform: translateY(22px); }
+  to { opacity: 1; transform: none; }
+}
 
 @media (max-width: 900px) {
   .links { display: none; }
@@ -272,6 +280,7 @@ footer a:hover { color: var(--gold); }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
+  .js, .js.in { opacity: 1; transform: none; }
 }
 </style>
 </head>
@@ -540,16 +549,54 @@ footer a:hover { color: var(--gold); }
 </footer>
 
 <script>
-window.addEventListener('scroll', () => {
-  const h = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-  document.getElementById('bar').style.width = (window.scrollY / h) * 100 + '%';
-}, { passive: true });
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const easeScroll = reduceMotion ? 'auto' : 'smooth';
+const bar = document.getElementById('bar');
+let scrollQueued = false;
+function onScroll() {
+  if (scrollQueued) return;
+  scrollQueued = true;
+  requestAnimationFrame(() => {
+    const h = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    bar.style.transform = `scaleX(${h ? window.scrollY / h : 0})`;
+    scrollQueued = false;
+  });
+}
+window.addEventListener('scroll', onScroll, { passive: true });
+onScroll();
 
-document.querySelectorAll('.tile, .shot, .card, .frame, .demo, .split').forEach(el => el.classList.add('js'));
-const io = new IntersectionObserver(es => {
-  es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
-}, { threshold: 0.12 });
-document.querySelectorAll('.js').forEach(el => io.observe(el));
+document.addEventListener('click', e => {
+  const a = e.target.closest('a[href^="#"]');
+  if (!a || a.classList.contains('js-demo')) return;
+  const href = a.getAttribute('href');
+  if (!href || href === '#') return;
+  const target = document.querySelector(href);
+  if (!target) return;
+  e.preventDefault();
+  target.scrollIntoView({ behavior: easeScroll, block: 'start' });
+  history.pushState(null, '', href);
+});
+
+const revealEls = document.querySelectorAll('.tile, .shot, .card, .frame, .demo, .split, h2, .sub');
+revealEls.forEach(el => {
+  el.classList.add('js');
+  if (el.matches('.tile, .card') && el.parentElement) {
+    const n = [...el.parentElement.children].indexOf(el);
+    el.style.animationDelay = `${Math.min(n * 0.06, 0.36)}s`;
+  }
+});
+if (reduceMotion) {
+  document.querySelectorAll('.js').forEach(el => el.classList.add('in'));
+} else {
+  const io = new IntersectionObserver(es => {
+    es.forEach(e => {
+      if (!e.isIntersecting) return;
+      e.target.classList.add('in');
+      io.unobserve(e.target);
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -10% 0px' });
+  document.querySelectorAll('.js').forEach(el => io.observe(el));
+}
 
 document.querySelectorAll('[data-slider]').forEach(root => {
   const slides = [...root.querySelectorAll('.slide')];
