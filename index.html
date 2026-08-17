@@ -67,7 +67,7 @@
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: auto; }
+html { scroll-behavior: auto; scroll-padding-top: 88px; }
 body {
   font-family: 'Inter', sans-serif;
   color: var(--ink);
@@ -102,7 +102,7 @@ nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
   padding: 0 5%; height: 88px;
   display: flex; align-items: center; justify-content: space-between;
-  transition: all 0.5s var(--ease-out);
+  transition: background 0.28s ease, height 0.28s ease, box-shadow 0.28s ease, color 0.28s ease;
   color: var(--white);
 }
 nav.scrolled {
@@ -815,17 +815,36 @@ footer .links a { color: rgba(255, 255, 255, 0.35); text-decoration: none; trans
 footer .links a:hover { color: var(--clay); }
 
 /* ── ANIMATIONS ── */
-.reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s var(--ease-out); }
-.reveal.visible { opacity: 1; transform: translateY(0); }
-.stagger[data-delay="1"] { transition-delay: 0.1s; }
-.stagger[data-delay="2"] { transition-delay: 0.2s; }
-.stagger[data-delay="3"] { transition-delay: 0.3s; }
-.stagger[data-delay="4"] { transition-delay: 0.4s; }
-.stagger[data-delay="5"] { transition-delay: 0.5s; }
-.stagger[data-delay="6"] { transition-delay: 0.6s; }
-.stagger[data-delay="7"] { transition-delay: 0.7s; }
-.stagger[data-delay="8"] { transition-delay: 0.8s; }
-.stagger[data-delay="9"] { transition-delay: 0.9s; }
+.reveal {
+  opacity: 0; transform: translateY(22px);
+  transition: opacity 0.55s var(--ease-out), transform 0.55s var(--ease-out);
+}
+.reveal.visible { opacity: 1; transform: none; }
+.reveal:has(.stagger) { opacity: 1; transform: none; }
+.stagger { opacity: 0; }
+.stagger.visible {
+  opacity: 1;
+  animation: rise-in 0.55s var(--ease-out) backwards;
+}
+@keyframes rise-in {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: none; }
+}
+.stagger.visible[data-delay="1"] { animation-delay: 0.04s; }
+.stagger.visible[data-delay="2"] { animation-delay: 0.08s; }
+.stagger.visible[data-delay="3"] { animation-delay: 0.12s; }
+.stagger.visible[data-delay="4"] { animation-delay: 0.16s; }
+.stagger.visible[data-delay="5"] { animation-delay: 0.2s; }
+.stagger.visible[data-delay="6"] { animation-delay: 0.24s; }
+.stagger.visible[data-delay="7"] { animation-delay: 0.28s; }
+.stagger.visible[data-delay="8"] { animation-delay: 0.32s; }
+.stagger.visible[data-delay="9"] { animation-delay: 0.36s; }
+.stagger.visible[data-delay="10"] { animation-delay: 0.4s; }
+.stagger.visible[data-delay="11"] { animation-delay: 0.44s; }
+.stagger.visible[data-delay="12"] { animation-delay: 0.48s; }
+@media (prefers-reduced-motion: reduce) {
+  .reveal, .stagger, .stagger.visible, .exp-row, .skill-item { opacity: 1; transform: none; transition: none; animation: none; }
+}
 
 /* ── RESPONSIVE ── */
 @media (max-width: 980px) {
@@ -1556,45 +1575,63 @@ function onScroll() {
 window.addEventListener('scroll', onScroll, { passive: true });
 onScroll();
 
-// Intersection Observer for reveals and skills
-const observerOptions = { threshold: 0.15, rootMargin: '0px 0px -50px 0px' };
-const revealObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-      
-      // If it's a skill item, animate it
-      if (entry.target.classList.contains('skill-item')) {
-        const fill = entry.target.querySelector('.skill-fill');
-        const pct = entry.target.querySelector('.skill-pct');
-        if (fill && pct && !entry.target.dataset.animated) {
-          entry.target.dataset.animated = "true";
-          fill.style.width = fill.dataset.w + '%';
-          animateValue(pct, 0, parseInt(pct.dataset.target), 1500);
-        }
-      }
-      
-      // If it's a reveal container with stagger children
-      if (entry.target.classList.contains('reveal')) {
-        entry.target.querySelectorAll('.stagger').forEach(child => child.classList.add('visible'));
-      }
-      
-      revealObserver.unobserve(entry.target);
-    }
-  });
-}, observerOptions);
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const easeScroll = reduceMotion ? 'auto' : 'smooth';
 
-document.querySelectorAll('.reveal, .exp-row, .skill-item').forEach(el => revealObserver.observe(el));
+document.addEventListener('click', e => {
+  const a = e.target.closest('a[href^="#"]');
+  if (!a) return;
+  const href = a.getAttribute('href');
+  if (href === '#' || a.classList.contains('nav-logo') || a.id === 'backTop') {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: easeScroll });
+    return;
+  }
+  const target = document.querySelector(href);
+  if (!target) return;
+  e.preventDefault();
+  target.scrollIntoView({ behavior: easeScroll, block: 'start' });
+  history.pushState(null, '', href);
+});
 
-function animateValue(obj, start, end, duration) {
-  let startTimestamp = null;
-  const step = (timestamp) => {
-    if (!startTimestamp) startTimestamp = timestamp;
-    const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-    obj.innerHTML = Math.floor(progress * (end - start) + start) + "%";
-    if (progress < 1) { window.requestAnimationFrame(step); }
+function animateSkill(item) {
+  const fill = item.querySelector('.skill-fill');
+  const pct = item.querySelector('.skill-pct');
+  if (!fill || !pct || item.dataset.animated) return;
+  item.dataset.animated = 'true';
+  fill.style.width = fill.dataset.w + '%';
+  if (reduceMotion) {
+    pct.textContent = pct.dataset.target + '%';
+    return;
+  }
+  const end = parseInt(pct.dataset.target, 10);
+  const start = performance.now();
+  const step = now => {
+    const t = Math.min((now - start) / 900, 1);
+    pct.textContent = Math.floor(t * end) + '%';
+    if (t < 1) requestAnimationFrame(step);
   };
-  window.requestAnimationFrame(step);
+  requestAnimationFrame(step);
+}
+
+function showEntry(el) {
+  el.classList.add('visible');
+  el.querySelectorAll('.stagger').forEach(child => child.classList.add('visible'));
+  if (el.classList.contains('skill-item')) animateSkill(el);
+  el.querySelectorAll('.skill-item').forEach(animateSkill);
+}
+
+if (reduceMotion) {
+  document.querySelectorAll('.reveal, .stagger, .exp-row, .skill-item').forEach(showEntry);
+} else {
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      showEntry(entry.target);
+      revealObserver.unobserve(entry.target);
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -10% 0px' });
+  document.querySelectorAll('.reveal, .exp-row, .skill-item').forEach(el => revealObserver.observe(el));
 }
 
 // Testimonial Slider
@@ -1621,17 +1658,6 @@ function showProduct(index) {
 function nextProduct() { showProduct(currentProduct + 1); }
 function prevProduct() { showProduct(currentProduct - 1); }
 setInterval(nextProduct, 10000);
-
-// Staggered children in revealed containers
-document.querySelectorAll('.reveal').forEach(parent => {
-  const children = parent.querySelectorAll('.stagger');
-  if (children.length) {
-    const parentObs = new IntersectionObserver(entries => {
-      entries.forEach(e => { if (e.isIntersecting) { children.forEach(c => c.classList.add('visible')); } });
-    }, { threshold: 0.1 });
-    parentObs.observe(parent);
-  }
-});
 
 // FAQ Accordion
 function toggleFaq(el) {
